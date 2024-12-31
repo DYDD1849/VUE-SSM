@@ -12,6 +12,7 @@ public class TesterServiceImpl implements TesterService{
     @Autowired
     private TesterMapper testerMapper;
     public List<Tester> findTesters(){
+        System.out.println("第二次成功");
         return testerMapper.findTester();
     }
 }

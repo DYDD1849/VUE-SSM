@@ -6,6 +6,6 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 
 public interface TesterMapper {
-    @Select("select * from test")
+    @Select("select * from tester")
     List<Tester> findTester();
 }
