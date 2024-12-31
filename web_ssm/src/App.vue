@@ -10,11 +10,11 @@
   <el-button type="primary" >主要按钮</el-button>
 </template>
 <script>
-import {ListUser} from '@/api/user.js'
+import {test} from '@/api/test.js'
   export default {
     name:'App',
     mounted(){
-      ListUser().then(res=> {
+      test().then(res=> {
         console.log(res)
       })
     }
