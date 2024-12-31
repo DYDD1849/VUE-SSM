@@ -13,8 +13,9 @@
             <tr>
                 <td>编号</td>
             </tr>
-            <c:forEach var="tester" items="${tester}">
+            <c:forEach var="tester" items="${testers}">
                 <tr>
+                    <td>12</td>
                     <td>${tester.testId}</td>
                 </tr>
             </c:forEach>
