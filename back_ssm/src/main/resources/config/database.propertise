@@ -1,0 +1,4 @@
+mysql.driverClassName=com.mysql.cj.jdbc.Driver
+mysql.url=jdbc:mysql://localhost:3306/openapi?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+mysql.username=root
+mysql.password=root
