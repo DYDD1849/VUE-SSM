@@ -5,5 +5,6 @@
 <h2>nsnsnsnsnsnns</h2>
 <p>xinzeng</p>
 <h1>sssssss</h1>
+<a href="/find_tester">查找</a>
 </body>
 </html>
