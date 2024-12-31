@@ -3,14 +3,14 @@
   registry: 'https://registry.npmmirror.com',
   pkgs: [
     {
-      name: '@vue/cli',
+      name: 'element-ui',
       version: 'latest',
       type: 'tag',
       alias: undefined,
       arg: [Result]
     },
     {
-      name: '5.0.8',
+      name: 'S',
       version: 'latest',
       type: 'tag',
       alias: undefined,
@@ -22,7 +22,7 @@
   cacheDir: 'C:\\Users\\15460\\.npminstall_tarball',
   env: {
     npm_config_registry: 'https://registry.npmmirror.com',
-    npm_config_argv: '{"remain":[],"cooked":["--fix-bug-versions","--china","--userconfig=C:\\\\Users\\\\15460\\\\.cnpmrc","--disturl=https://cdn.npmmirror.com/binaries/node","--registry=https://registry.npmmirror.com","@vue/cli","5.0.8"],"original":["--fix-bug-versions","--china","--userconfig=C:\\\\Users\\\\15460\\\\.cnpmrc","--disturl=https://cdn.npmmirror.com/binaries/node","--registry=https://registry.npmmirror.com","@vue/cli","5.0.8"]}',
+    npm_config_argv: '{"remain":[],"cooked":["--fix-bug-versions","--china","--userconfig=C:\\\\Users\\\\15460\\\\.cnpmrc","--disturl=https://cdn.npmmirror.com/binaries/node","--registry=https://registry.npmmirror.com","element-ui","S"],"original":["--fix-bug-versions","--china","--userconfig=C:\\\\Users\\\\15460\\\\.cnpmrc","--disturl=https://cdn.npmmirror.com/binaries/node","--registry=https://registry.npmmirror.com","element-ui","S"]}',
     npm_config_user_agent: 'npminstall/7.12.0 npm/? node/v22.12.0 win32 x64',
     npm_config_cache: 'C:\\Users\\15460\\.npminstall_tarball',
     NODE: 'D:\\Program Files\\nodejs\\node.exe',
