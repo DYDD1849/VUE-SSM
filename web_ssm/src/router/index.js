@@ -1,6 +1,17 @@
+import LogIn from "@/views/LogIn.vue";
 import { createRouter, createWebHistory } from "vue-router";
-
+import MainIndex from "@/views/MainIndex.vue";
 const routes = [
+    {
+      path:"/",
+      name:"login",
+      component:LogIn,
+    },
+    {
+      path:"/main",
+      name:"main",
+      component:MainIndex
+    },
   // {
   //   path: "/",
   //   name: "home",
