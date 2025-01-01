@@ -11,16 +11,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 //@Controller
-@RestController
+@Controller
 public class TesterController {
     @Autowired
     private TesterService testerService;
-//    @RequestMapping(value = "/find_tester", method = RequestMethod.GET)
-//    public String findTester(Model model){
-//        System.out.println("成功");
-//        model.addAttribute("testers",testerService.findTesters());
-//        return  "tester/test_list";
-//    }
+    @RequestMapping(value = "/find_tester", method = RequestMethod.GET)
+    public String findTester(Model model){
+        System.out.println("成功");
+        model.addAttribute("testers",testerService.findTesters());
+        return  "tester/test_list";
+    }
     @GetMapping(value = "/find")
     @ResponseBody
     public List<Tester> findTester(){
