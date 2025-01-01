@@ -1,24 +1,53 @@
 <template>
   <nav>
-    <router-link to="/">Home</router-link> 
-    
+    <router-link to="/">Home</router-link>
+
     <router-link to="/about">About</router-link>
-    
+    <ul>
+      <li v-for="item in backdata" :key="item.testId">
+        {{ item.testId }}
+      </li>
+    </ul>
   </nav>
-  
-  <router-view/>
-  <el-button type="primary" >主要按钮</el-button>
+
+  <router-view />
+
+  <el-button type="primary" @click="clickpost">主要按钮</el-button>
 </template>
 <script>
-import {test} from '@/api/test.js'
-  export default {
-    name:'App',
-    mounted(){
-      test().then(res=> {
+import { test } from '@/api/test.js'
+// import axios from "axios"
+import { data } from '@/api/data.js'
+export default {
+  name: 'App',
+  data() {
+    return {
+      a: { "testId": 3 },
+      backdata: null,
+    }
+  },
+  methods: {
+    clickpost: function () {
+
+      // let data = {"testId":1}  // 带发送的数据
+      // axios.post('http://localhost:80/back_ssm/data', this.a).then((res) => {
+      //   console.log(res)
+      // }, (error) => {
+      //   console.log(error)
+      // })
+      data(this.a).then((res) => {
         console.log(res)
+      }, (error) => {
+        console.log(error)
       })
     }
+  },
+  mounted() {
+    test().then(res => {
+      this.backdata = res.data;
+    })
   }
+}
 </script>
 <style lang="scss">
 #app {

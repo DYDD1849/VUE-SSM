@@ -27,4 +27,11 @@ public class TesterController {
         List<Tester> testers=testerService.findTesters();
         return  testers;
    }
+
+    @PostMapping(value = "/data")
+    @ResponseBody
+    public String data(@RequestBody Tester a){
+        System.out.println(a);
+        return  "成功";
+    }
 }

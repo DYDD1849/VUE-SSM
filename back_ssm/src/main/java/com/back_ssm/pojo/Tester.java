@@ -10,4 +10,11 @@ public class Tester {
     public void setTestId(int testId) {
         this.testId = testId;
     }
+
+    @Override
+    public String toString() {
+        return "Tester{" +
+                "testId=" + testId +
+                '}';
+    }
 }
