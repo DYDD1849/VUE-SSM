@@ -10,13 +10,15 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     @Autowired
     UserService userService;
-    @GetMapping(value = "/findUser")
+    @PostMapping(value = "/login")
     @ResponseBody
     public String data(@RequestBody User user){
         System.out.println("查询...");
-
         User finduser=userService.findUser(user);
-        System.out.println(finduser.getUserId());
+        if (finduser!=null)
         return  "1";
+        else
+            return "0";
+
     }
 }
