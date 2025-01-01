@@ -6,8 +6,8 @@ export function test(query){
     
     return request({
         //发送请求
-        url:'/back_ssm/find',
+        url:'find',
         method:'get',
         params:query
     })
-}
+}   

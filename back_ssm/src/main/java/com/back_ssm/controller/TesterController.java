@@ -1,13 +1,14 @@
 package com.back_ssm.controller;
 
+import com.back_ssm.pojo.Tester;
 import com.back_ssm.service.TesterService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 //@Controller
 @RestController
@@ -21,9 +22,16 @@ public class TesterController {
 //        return  "tester/test_list";
 //    }
     @GetMapping(value = "/find")
-    public String findTester(Model model){
-        System.out.println("成功");
-
-        return  "testers";
+    @ResponseBody
+    public List<Tester> findTester(){
+        List<Tester> testers=testerService.findTesters();
+        return  testers;
    }
+
+    @PostMapping(value = "/data")
+    @ResponseBody
+    public String data(@RequestBody Tester a){
+        System.out.println(a);
+        return  "成功";
+    }
 }
