@@ -20,7 +20,7 @@ public class UserController {
     @ResponseBody
     public Student studentLogin(@RequestBody User user){
         System.out.println("登录...");
-        User finduser=userService.findUser(user);
+        User finduser=userService.findUserByAccountPassword(user);
         Student student=null;
         if (finduser!=null) student= studentService.findStudentByAccount(finduser.getAccount());
         return student;
@@ -30,7 +30,7 @@ public class UserController {
     @ResponseBody
     public Teacher teacherLogin(@RequestBody User user){
         System.out.println("登录...");
-        User finduser=userService.findUser(user);
+        User finduser=userService.findUserByAccountPassword(user);
         Teacher teacher=null;
         if (finduser!=null) teacher= teacherService.findTeacherByAccount(user.getAccount());
         return teacher;
@@ -40,7 +40,7 @@ public class UserController {
     @ResponseBody
     public String StudentRegister(@RequestBody StudentUser studentUser){
         System.out.println("注册...");
-        User finduser=userService.findUser(studentUser.getUser());
+        User finduser=userService.findByAccount(studentUser.getUser());
         Student student=studentService.findStudentBySno(studentUser.getStudent().getSno());
         if(finduser==null && student==null){
             int rs1=userService.addUser(studentUser.getUser());
@@ -55,14 +55,13 @@ public class UserController {
     public String TeacherRegister(@RequestBody TeacherUser teacherUser){
         System.out.println("注册...");
 //        查询用户和教师有没有冲突
-        User finduser=userService.findUser(teacherUser.getUser());
+        User finduser=userService.findByAccount(teacherUser.getUser());
         Teacher teacher=teacherService.findTeacherByTno(teacherUser.getTeacher().getTno());
         if(finduser==null && teacher==null){
             int rs1=userService.addUser(teacherUser.getUser());
             int rs2=teacherService.addTeacher(teacherUser.getTeacher());
             return "1";
         }
-
         else return "0";
     }
 }

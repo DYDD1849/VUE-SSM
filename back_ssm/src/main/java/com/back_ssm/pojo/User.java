@@ -2,7 +2,6 @@ package com.back_ssm.pojo;
 
 public class User {
     private String account;
-    private int userId;
     private String password;
     private int role;
 
@@ -12,14 +11,6 @@ public class User {
 
     public void setAccount(String account) {
         this.account = account;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     public String getPassword() {
