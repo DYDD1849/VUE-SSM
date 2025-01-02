@@ -2,7 +2,7 @@ package com.back_ssm.pojo;
 
 public class TeacherUser {
     private User user;
-    private Tester tester;
+    private Teacher teacher;
 
     public User getUser() {
         return user;
@@ -12,11 +12,11 @@ public class TeacherUser {
         this.user = user;
     }
 
-    public Tester getTester() {
-        return tester;
+    public Teacher getTeacher() {
+        return teacher;
     }
 
-    public void setTester(Tester tester) {
-        this.tester = tester;
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
     }
 }
