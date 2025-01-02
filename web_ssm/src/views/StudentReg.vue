@@ -83,8 +83,8 @@
           tip.value.tips='账号/学生已存在';
         }
       } catch (error) {
-        console.error('注册时发生错误:', error);
         tip.value.tips='注册时发生错误';
+        console.error('注册时发生错误:', error);
       }
     };
 

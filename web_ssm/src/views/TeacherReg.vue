@@ -19,6 +19,9 @@
                 <el-form-item label="院系">
                     <el-input v-model="TeacherUser.teacher.college"/>
                 </el-form-item>
+                <el-form-item label="职衔">
+                    <el-input v-model="TeacherUser.teacher.title"/>
+                </el-form-item>
                 <el-form-item label="性别">
                     <el-input v-model="TeacherUser.teacher.sex"/>
                 </el-form-item>
@@ -72,6 +75,7 @@
           console.error('注册时发生错误');
         }
       } catch (error) {
+        tip.value.tips='注册时发生错误';
         console.error('注册时发生错误:', error);
       }
     };

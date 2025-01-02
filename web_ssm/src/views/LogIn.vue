@@ -2,11 +2,30 @@
 <div>
     <el-card style="max-width: 480px;">
         <el-form label-width="auto" style="max-width: 600px">
+            <!--如果账号存在，会显示提示-->
+            <el-text class="mx-1" type="danger" v-model="tip">{{ tip.tips }}</el-text>
             <el-form-item label="账号">
                 <el-input v-model="user.account"/>
             </el-form-item>
             <el-form-item label="密码">
                 <el-input v-model="user.password"/>
+            </el-form-item>
+            <!--身份选择-->
+            <el-form-item label="身份">
+              <el-select
+              v-model="user.role"
+              clearable
+              placeholder="Select"
+              style="width: 600px"
+              >
+              <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              />
+            </el-select>
+            <!--身份选择end-->
             </el-form-item>
             <el-form-item>
                 <el-button type="primary" @click="input">登录</el-button>
@@ -41,7 +60,8 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { LogIn } from "@/api/user/login.js";
+import { studentLogIn } from "@/api/user/login.js";
+import { teacherLogIn } from "@/api/user/login.js";
 import { ElMessageBox } from 'element-plus'
 
 const dialogVisible = ref(false)
@@ -55,9 +75,29 @@ const handleClose = (done) => {
       // catch error
     })
 }
- 
+//身份选择
+const options = [
+  {
+    value: '1',
+    label: '学生',
+  },
+  {
+    value: '2',
+    label: '教师',
+  },
+  {
+    value: '3',
+    label: '管理员',
+  },
+]
+//身份选择end
+
+const tip =ref({
+        tips:''
+    })
+
 // 创建响应式数据
-const user = ref({ account: '', password: '' });
+const user = ref({ account: '', password: '',role:'' });
 // const rs = ref(null); // 通常这个变量可能不是必需的，除非您有特定的用途
  
 // 获取路由实例
@@ -66,12 +106,37 @@ const router = useRouter();
 // 定义登录方法
 const input = async () => {
   try {
-    const res = await LogIn(user.value);
+    var res
+    if (user.value.role=='1'){
+      res = await studentLogIn(user.value);
+    }
+    else if(user.value.role=='2'){
+      res = await teacherLogIn(user.value);
+    }
+    else if(user.value.role=='3'){
+      res = await studentLogIn(user.value);
+    }
+    else
+    {
+      tip.value.tips='请选择您的身份';
+    }
     console.log(res);
-    if (res.data === "1") {
-      router.push('/main');
+    if (Object.keys(res.data).length !== 0 ) {
+      if (user.value.role=='1'){
+        sessionStorage.setItem('studentData', JSON.stringify(res.data));
+        router.push('/StudentMain');
+      }
+      else if(user.value.role=='2'){
+        sessionStorage.setItem('teacherData', JSON.stringify(res.data));
+        router.push('/TeacherMain');
+      }
+      else if(user.value.role=='3'){
+        sessionStorage.setItem('managerData', JSON.stringify(res.data));
+        router.push('/ManagerMain');
+      }
     } else {
       // 可能需要在这里处理登录失败的情况
+      tip.value.tips='账号不存在或密码错误';
       console.error('Login failed');
     }
   } catch (error) {
