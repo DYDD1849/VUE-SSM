@@ -16,6 +16,11 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
+    public Teacher findTeacherByTno(String tno) {
+        return teacherMapper.findTeacherByAccount(tno);
+    }
+
+    @Override
     public Teacher findTeacherByAccount(String account) {
         return teacherMapper.findTeacherByAccount(account);
     }

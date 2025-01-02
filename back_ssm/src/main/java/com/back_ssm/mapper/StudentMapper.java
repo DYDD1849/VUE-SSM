@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
 public interface StudentMapper {
+    @Select("select * from student where sno=#{sno}")
+    public Student findStudentBySno(String sno);
     @Select("select * from student where account=#{account}")
     public Student findStudentByAccount(String account);
     @Insert("INSERT INTO student VALUES (#{sno}, #{name}, #{account}, #{sex}, #{college}, #{major}, #{phone}, #{address})")
