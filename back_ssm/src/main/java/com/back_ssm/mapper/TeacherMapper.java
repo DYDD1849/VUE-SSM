@@ -12,4 +12,5 @@ public interface TeacherMapper {
     @Insert("INSERT INTO teacher (tno, name, college, sex, title, cno, account) " +
             "VALUES (#{tno}, #{name}, #{college}, #{sex}, #{title}, #{account})")
     public int addTeacher(Teacher teacher);
+
 }
