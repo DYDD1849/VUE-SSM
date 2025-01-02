@@ -1,19 +1,18 @@
 package com.back_ssm.pojo;
 
 public class Teacher {
-    private int tno;
+    private String tno;
     private String name;
     private String college;
     private String sex;
     private String title;
-    private int cno; // 注意这里使用了 Integer 类型，因为 cno 字段在 SQL 中允许为 NULL
     private String account;
 
-    public int getTno() {
+    public String getTno() {
         return tno;
     }
 
-    public void setTno(int tno) {
+    public void setTno(String tno) {
         this.tno = tno;
     }
 
@@ -48,15 +47,6 @@ public class Teacher {
     public void setTitle(String title) {
         this.title = title;
     }
-
-    public int getCno() {
-        return cno;
-    }
-
-    public void setCno(int cno) {
-        this.cno = cno;
-    }
-
     public String getAccount() {
         return account;
     }

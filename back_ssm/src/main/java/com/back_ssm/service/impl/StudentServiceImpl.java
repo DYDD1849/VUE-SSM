@@ -11,11 +11,16 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     StudentMapper studentMapper;
     @Override
-    public Student findStudentByAccount(String account) {
-        return studentMapper.findStudentByAccount(account);
+    public Student findStudentBySno(String sno) {
+        return studentMapper.findStudentByAccount(sno);
     }
     @Override
-    public int addStudend(Student student) {
+    public int addStudent(Student student) {
         return studentMapper.addStudent(student);
+    }
+
+    @Override
+    public Student findStudentByAccount(String account) {
+        return studentMapper.findStudentByAccount(account);
     }
 }

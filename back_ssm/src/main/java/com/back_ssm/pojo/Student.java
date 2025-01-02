@@ -1,7 +1,7 @@
 package com.back_ssm.pojo;
 
 public class Student {
-    private int sno;
+    private String sno;
     private String name;
     private String account;
     private String sex;
@@ -10,11 +10,11 @@ public class Student {
     private String phone;
     private String address;
 
-    public int getSno() {
+    public String getSno() {
         return sno;
     }
 
-    public void setSno(int sno) {
+    public void setSno(String sno) {
         this.sno = sno;
     }
 
