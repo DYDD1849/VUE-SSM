@@ -1,9 +1,8 @@
 package com.back_ssm.controller;
 
-import com.back_ssm.pojo.Student;
-import com.back_ssm.pojo.StudentUser;
-import com.back_ssm.pojo.User;
+import com.back_ssm.pojo.*;
 import com.back_ssm.service.StudentService;
+import com.back_ssm.service.TeacherService;
 import com.back_ssm.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +13,8 @@ public class UserController {
     UserService userService;
     @Autowired
     StudentService studentService;
+    @Autowired
+    TeacherService teacherService;
     @PostMapping(value = "/studentLogin")
     @ResponseBody
     public Student studentLogin(@RequestBody User user){
@@ -44,5 +45,19 @@ public class UserController {
             return "用户注册"+rs1+";学生注册"+rs2;
         }
         else return "用户或学生已存在";
+    }
+
+    @PostMapping(value = "/teacherRegister")
+    @ResponseBody
+    public String TeacherRegister(@RequestBody TeacherUser teacherUser){
+        System.out.println("注册...");
+        User finduser=userService.findUser(teacherUser.getUser());
+        Teacher teacher=teacherService.findTeacherByAccount(teacherUser.getTeacher().getAccount());
+        if(finduser==null && teacher==null){
+            int rs1=userService.addUser(teacherUser.getUser());
+            int rs2=teacherService.addTeacher(teacherUser.getTeacher());
+            return "用户注册"+rs1+";教师注册"+rs2;
+        }
+        else return "用户或教师已存在";
     }
 }
