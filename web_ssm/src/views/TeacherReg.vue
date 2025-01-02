@@ -3,28 +3,28 @@
         <el-card style="max-width: 480px;">
             <el-form label-width="auto" style="max-width: 600px">
                 <el-form-item label="账号">
-                    <el-input v-model="user.account"/>
+                    <el-input v-model="TeacherUser.user.account"/>
                 </el-form-item>
                 <el-form-item label="密码">
-                    <el-input v-model="user.password"/>
+                    <el-input v-model="TeacherUser.user.password"/>
                 </el-form-item>
-                <el-form-item label="密码">
-                    <el-input v-model="user.password"/>
+                <el-form-item label="工号">
+                    <el-input v-model="TeacherUser.teacher.tno"/>
                 </el-form-item>
-                <el-form-item label="密码">
-                    <el-input v-model="user.password"/>
+                <el-form-item label="姓名">
+                    <el-input v-model="TeacherUser.teacher.name"/>
                 </el-form-item>
-                <el-form-item label="密码">
-                    <el-input v-model="user.password"/>
+                <el-form-item label="院系">
+                    <el-input v-model="TeacherUser.teacher.college"/>
                 </el-form-item>
-                <el-form-item label="密码">
-                    <el-input v-model="user.password"/>
+                <el-form-item label="性别">
+                    <el-input v-model="TeacherUser.teacher.sex"/>
+                </el-form-item>
+                <el-form-item label="课号">
+                    <el-input v-model="TeacherUser.teacher.cno"/>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary" @click="input">登录</el-button>
-                    <el-button plain @click="dialogVisible = true">
-                        注册
-                    </el-button>
+                    <el-button type="primary" @click="input">注册</el-button>
                   </el-form-item>
             </el-form>
         </el-card>
@@ -39,10 +39,18 @@
     // 创建响应式数据
     const TeacherUser = ref({ 
         user:{
-
+            account:'',
+            password:'',
+            role:'2'
         },
         teacher:{
-
+            tno:'',
+            name:'',
+            college:'',
+            sex:'',
+            title:'',
+            cno:'',
+            account:''
         } 
 });
     // const rs = ref(null); // 通常这个变量可能不是必需的，除非您有特定的用途

@@ -41,8 +41,9 @@ public class UserController {
         if(finduser==null && student==null){
             int rs1=userService.addUser(studentUser.getUser());
             int rs2=studentService.addStudend(studentUser.getStudent());
-            return "用户注册"+rs1+";学生注册"+rs2;
+            return "1";
         }
-        else return "用户或学生已存在";
+        else return "0";
+        
     }
 }
