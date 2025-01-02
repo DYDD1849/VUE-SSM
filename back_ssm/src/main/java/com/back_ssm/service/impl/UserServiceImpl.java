@@ -15,4 +15,9 @@ public class UserServiceImpl implements UserService {
 
         return userMapper.findUser(user);
     }
+
+    @Override
+    public int addUser(User user) {
+        return userMapper.addUser(user);
+    }
 }
