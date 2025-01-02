@@ -2,6 +2,8 @@
     <div>
         <el-card style="max-width: 480px;">
             <el-form label-width="auto" style="max-width: 600px">
+                <!--如果账号存在，会显示提示-->
+                <el-text class="mx-1" type="danger" v-model="tip">{{ tip.tips }}</el-text>
                 <el-form-item label="账号">
                     <el-input v-model="TeacherUser.user.account"/>
                 </el-form-item>
@@ -33,9 +35,11 @@
     <script setup>
     import { ref } from 'vue';
     import { useRouter } from 'vue-router';
-    import { LogIn } from "@/api/user/login.js";
+    import { teacherRegister } from "@/api/user/teacherRegister.js";
 
-    
+    const tip =ref({
+        tips:''
+    })
     // 创建响应式数据
     const TeacherUser = ref({ 
         user:{
@@ -61,16 +65,18 @@
     // 定义登录方法
     const input = async () => {
       try {
-        const res = await LogIn(TeacherUser.value);
+        TeacherUser.value.teacher.account=TeacherUser.value.user.account;
+        const res = await teacherRegister(TeacherUser.value);
         console.log(res);
-        if (res.data === "1") {
+        if (res.data == "1") {
           router.push('/main');
         } else {
           // 可能需要在这里处理登录失败的情况
-          console.error('Login failed');
+          tip.value.tips='账号/教师已存在';
+          console.error('注册时发生错误');
         }
       } catch (error) {
-        console.error('An error occurred during login:', error);
+        console.error('注册时发生错误:', error);
       }
     };
 
