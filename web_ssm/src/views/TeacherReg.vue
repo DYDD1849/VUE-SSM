@@ -22,9 +22,6 @@
                 <el-form-item label="性别">
                     <el-input v-model="TeacherUser.teacher.sex"/>
                 </el-form-item>
-                <el-form-item label="课号">
-                    <el-input v-model="TeacherUser.teacher.cno"/>
-                </el-form-item>
                 <el-form-item>
                     <el-button type="primary" @click="input">注册</el-button>
                   </el-form-item>
@@ -53,7 +50,6 @@
             college:'',
             sex:'',
             title:'',
-            cno:'',
             account:''
         } 
 });
