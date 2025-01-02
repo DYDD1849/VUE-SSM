@@ -12,7 +12,7 @@ public class UserController {
     UserService userService;
     @PostMapping(value = "/login")
     @ResponseBody
-    public String data(@RequestBody User user){
+    public String login(@RequestBody User user){
         System.out.println("查询...");
         User finduser=userService.findUser(user);
         if (finduser!=null)
@@ -20,5 +20,15 @@ public class UserController {
         else
             return "0";
 
+    }
+    @PostMapping(value = "/register")
+    @ResponseBody
+    public String register(@RequestBody User user){
+        System.out.println("注册...");
+        if(userService.findUser(user)==null){
+            int rs=userService.addUser(user);
+            return ""+rs;
+        }
+        else return "用户已经存在";
     }
 }
