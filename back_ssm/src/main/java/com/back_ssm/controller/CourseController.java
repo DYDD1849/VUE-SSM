@@ -1,8 +1,8 @@
 package com.back_ssm.controller;
 
-import com.back_ssm.pojo.SnoCourse;
-import com.back_ssm.pojo.Student;
+import com.back_ssm.pojo.*;
 import com.back_ssm.service.CourseService;
+import com.back_ssm.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,9 +16,16 @@ import java.util.List;
 public class CourseController {
     @Autowired
     CourseService courseService;
-    @PostMapping(value = "/findSnoCourse")
+
+    @PostMapping(value = "/findStudentCourse")
     @ResponseBody
     public List<SnoCourse> getStudentCourseScore(@RequestBody Student student){
         return courseService.findSnoCourseBySno(student.getSno());
     }
+    @PostMapping(value = "/findTeacherCourse")
+    @ResponseBody
+    public List<Course> getTeacherCourse(@RequestBody Teacher teacher){
+        return courseService.findCourseByTno(teacher.getTno());
+    }
+
 }
