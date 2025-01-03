@@ -31,11 +31,31 @@ const routes = [
       path:"/TeacherMain",
       name:"teacherMain",
       component:TeacherMainIndex,
+      children:[
+        {
+          path: "/TeacherEnterCourse",
+          component: () => import("../views/TeacherEnterCourse/TeacherEnterCourse.vue"),
+        },
+      ]
     },
     {
       path:"/ManagerMain",
       name:"managerMain",
       component:ManagerMainIndex,
+      children:[
+        {
+          path: "/ManageStudent",
+          component: () => import("../views/ManageChild/ManageStudent.vue"),
+        },
+        {
+          path: "/ManageTeacher",
+          component: () => import("../views/ManageChild/ManageTeacher.vue"),
+        },
+        {
+          path: "/ManageStudentScore",
+          component: () => import("../views/ManageChild/ManageStudentScore.vue"),
+        },
+      ]
     },
   // {
   //   path: "/",
