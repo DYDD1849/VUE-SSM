@@ -11,15 +11,6 @@
         :key="index"
       >
         <!--            消息头像-->
-        <div
-          :class="
-            message.sender === 'me'
-              ? 'message-me-asWhole-headPortrait'
-              : 'message-other-asWhole-headPortrait'
-          "
-        >
-          <img src="~@/assets/p1.jpg" class="examineeFace_logo_style" />
-        </div>
         <!--          消息-->
         <div
           :class="
@@ -36,7 +27,7 @@
                 : 'message-other-asWhole-top'
             "
           >
-            考生
+            {{ message.sender }}
           </div>
           <!--          消息内容-->
           <div :class="message.sender === 'me' ? 'message-me' : 'message-other'">
@@ -45,9 +36,25 @@
         </div>
       </div>
       <br />
-      <div class="chat-container">
-        <textarea></textarea>
-      </div>
+      <el-container>
+        <el-footer >
+        <div class="mt-4">
+            <el-input
+              v-model="textareaMsg"
+              size="large"
+              style="max-width: 600px"
+              placeholder="Please input"
+              class="input-with-select"
+            >
+              <template #append>
+                <el-button>
+                    发送
+                </el-button>
+              </template>
+            </el-input>
+          </div>
+        </el-footer>
+        </el-container>
     </div>
   </template>
   <script>
@@ -76,6 +83,7 @@
           { sender: "me", content: "再见！" },
           { sender: "other", content: "再见！" },
         ],
+        textareaMsg:""
       };
     },
   };
@@ -158,25 +166,5 @@
   .examineeFace_logo_style {
     width: 30px;
   }
-  /* ... 其他样式 ... */
-  
-  textarea {
-    position: fixed; /* 将textarea固定在视口 */
-    bottom: 10px; /* 距离视口底部10px */
-    right: 10px; /* 可选：距离视口右侧10px，根据布局需要调整 */
-    width: calc(100% - 40px); /* 可选：宽度为视口宽度减去左右各20px的间距 */
-    /* 注意：由于使用了fixed定位，rows和cols属性可能不再准确控制尺寸 */
-    /* 您可能需要使用height和width属性来更精确地控制尺寸 */
-    /* 例如：height: 150px; width: 300px; （根据实际需求调整） */
-    /* 但请注意，固定尺寸可能会在不同屏幕尺寸上表现不佳 */
-    /* 因此，使用百分比或视口单位（如vw, vh）可能更为灵活 */
-  }
-  
-  /* 如果需要为textarea上方的聊天内容留出空间，可以添加一个底部填充 */
-  .chat-container {
-    padding-bottom: 170px; /* 根据textarea的高度和底部间距调整 */
-  }
-  
-  /* ... 其他样式 ... */
   </style>
   

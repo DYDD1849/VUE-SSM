@@ -2,7 +2,6 @@ package com.back_ssm.controller;
 
 import com.back_ssm.pojo.*;
 import com.back_ssm.service.CourseService;
-import com.back_ssm.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
