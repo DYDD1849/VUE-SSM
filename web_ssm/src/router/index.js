@@ -1,17 +1,16 @@
-// import LogIn from "@/views/LogIn.vue";
 import { createRouter, createWebHistory } from "vue-router";
 import studentReg from "@/views/StudentReg.vue";
 import teacherReg from "@/views/TeacherReg.vue";
 import StudentMainIndex from "@/views/StudentMainIndex.vue";
 import TeacherMainIndex from "@/views/TeacherMainIndex.vue";
 import ManagerMainIndex from "@/views/ManagerMainIndex.vue";
-import ChatTest from "@/views/chatTest.vue";
+import LogIn from "@/views/LogIn.vue";
 
 const routes = [
     {
       path:"/",
       name:"login",
-      component:ChatTest,
+      component:LogIn,
     },
     {
       path:"/studentReg",
