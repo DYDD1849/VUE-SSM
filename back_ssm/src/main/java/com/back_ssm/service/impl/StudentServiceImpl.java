@@ -36,4 +36,9 @@ public class StudentServiceImpl implements StudentService {
     public int altStudent(Student student) {
         return studentMapper.altStudent(student);
     }
+
+    @Override
+    public List<Student> findAllStudent() {
+        return studentMapper.findAllStudent();
+    }
 }

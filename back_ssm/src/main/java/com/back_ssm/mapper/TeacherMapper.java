@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import java.util.List;
+
 public interface TeacherMapper {
     @Select("select * from teacher where tno=#{tno}")
     public Teacher findTeacherByTno(String tno);
@@ -15,4 +17,6 @@ public interface TeacherMapper {
     public int addTeacher(Teacher teacher);
     @Update("update teacher set name = #{name}, college = #{college}, sex = #{sex}, title = #{title} where tno = #{tno}")
     public int altTeacher(Teacher teacher);
+    @Select("select * from teacher")
+    public List<Teacher> findAllTeacher();
 }
