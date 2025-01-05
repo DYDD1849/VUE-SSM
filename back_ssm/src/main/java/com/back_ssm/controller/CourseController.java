@@ -28,4 +28,10 @@ public class CourseController {
         return courseService.findCourseByTno(teacher.getTno());
     }
 
+    @PostMapping(value = "/findAllCourse")
+    @ResponseBody
+    public List<Course> getAllCourse(){
+        return courseService.findAllCourse();
+    }
+
 }

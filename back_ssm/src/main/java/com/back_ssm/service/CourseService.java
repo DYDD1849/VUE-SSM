@@ -9,4 +9,5 @@ public interface CourseService {
     public List<Course> findCourseBySno(String sno);
     public List<Course> findCourseByTno(String tno);
     public List<SnoCourse> findSnoCourseBySno(String sno);
+    public List<Course> findAllCourse();
 }

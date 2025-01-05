@@ -35,6 +35,15 @@ public class UserController {
         if (finduser!=null) teacher= teacherService.findTeacherByAccount(user.getAccount());
         return teacher;
     }
+
+    @PostMapping(value = "/MangerLogin")
+    @ResponseBody
+    public User MangerLogin(@RequestBody User user){
+        System.out.println("登录...");
+        User user1 =userService.findUserByAccountPassword(user);
+        return user1;
+    }
+
 //    学生注册
     @PostMapping(value = "/studentRegister")
     @ResponseBody

@@ -28,4 +28,9 @@ public class CourseServiceImpl implements CourseService {
         return courseMapper.findSnoCourseBySno(sno);
     }
 
+    @Override
+    public List<Course> findAllCourse() {
+        return courseMapper.findAllCourse();
+    }
+
 }
