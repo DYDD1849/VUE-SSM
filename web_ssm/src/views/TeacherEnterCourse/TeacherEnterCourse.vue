@@ -47,7 +47,7 @@
           </el-scrollbar>
         </el-main>
     </el-container>
-    <el-dialog
+  <el-dialog
     v-model="dialogVisibleAlter"
     title="Tips"
     width="500"

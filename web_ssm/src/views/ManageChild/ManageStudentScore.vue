@@ -11,7 +11,6 @@
                 />
                 <button @click="goToTeacherCourse">返回</button>
                 <button @click="handleAdd">添加</button>
-                {{ storeCno }}
             </div>
           <div class="toolbar">
             <el-dropdown>
@@ -33,24 +32,154 @@
           <el-scrollbar>
             <el-table :data="items">
               <el-table-column prop="sno" label="学号" width="120" />
-              <el-table-column prop="cno" label="课程号" width="120" />
               <el-table-column prop="sscore" label="成绩" width="120"/>
+              <el-table-column width="120">
+              <template #default="scope">
+                <el-link href="#" @click="handleAlter(scope.row)">修改</el-link>
+              </template>
+              </el-table-column>
+              <el-table-column width="120">
+              <template #default="scope">
+                <el-link href="#" @click="handleDel(scope.row)">删除</el-link>
+              </template>
+              </el-table-column>
             </el-table>
           </el-scrollbar>
         </el-main>
     </el-container>
+  <el-dialog
+    v-model="dialogVisibleAlter"
+    title="Tips"
+    width="500"
+    :before-close="handleClose"
+  >
+  <div class="searchbar">
+                <span>输入新成绩</span>
+                <el-input
+                v-model="input1"
+                style="width: 240px"
+                placeholder="输入成绩"
+                :prefix-icon="Search"
+                />
+  </div>
+    <template #footer>
+      <div class="dialog-footer">
+        <el-button type="primary" @click="modify">
+          修改
+        </el-button>
+        <el-button @click="dialogVisibleAlter = false">取消</el-button>
+      </div>
+    </template>
+  </el-dialog>
+
+  <el-dialog
+    v-model="dialogVisibleDel"
+    title="Tips"
+    width="500"
+    :before-close="handleClose"
+  >
+  <span>确认要删除吗</span>
+    <template #footer>
+      <div class="dialog-footer">
+        <el-button type="primary" @click="del">
+          删除
+        </el-button>
+        <el-button @click="dialogVisibleDel = false">取消</el-button>
+      </div>
+    </template>
+  </el-dialog>
+
+  <el-dialog
+    v-model="dialogVisibleAdd"
+    title="Tips"
+    width="500"
+    :before-close="handleClose"
+  >
+  <div class="searchbar">
+                <span>输入新成绩</span>
+                <el-input
+                v-model="input2"
+                style="width: 200px"
+                placeholder="输入学号"
+                :prefix-icon="Search"
+                />
+                <el-input
+                v-model="input3"
+                style="width: 200px"
+                placeholder="输入成绩"
+                :prefix-icon="Search"
+                />
+  </div>
+    <template #footer>
+      <div class="dialog-footer">
+        <el-button type="primary" @click="add">
+          修改
+        </el-button>
+        <el-button @click="dialogVisibleAdd = false">取消</el-button>
+      </div>
+    </template>
+  </el-dialog>
 </template>
 <script setup>
   import { ref } from 'vue';
   import { useRouter,useRoute } from 'vue-router';
-  import { StudentCourseTable } from '@/api/main/manager/StudentCourseTable.js';
+  import { managerEnterCourse,managerAltScore,managerDelScore,managerAddScore } from '@/api/main/manager/managerSC.js';
 
-  const storeCno =ref(null);
 //管理员信息传递
   const managerData = ref(null);
 //存储所有成绩信息
   const items = ref([]); 
-  
+//修改 删除框显示
+  const storeSno =ref(null);
+  const storeCno =ref(null);
+  const dialogVisibleAlter = ref(false)
+  const dialogVisibleDel = ref(false)
+  const dialogVisibleAdd = ref(false)
+  // 修改 删除点击事件处理函数
+  const handleAlter = (row) => {
+    dialogVisibleAlter.value=true;
+    storeSno.value=row.sno;
+    console.log('AstoreSno', storeSno);
+    //router.push({name: 'routeName',params:{ cno:row.cno}});
+  };
+
+  const handleDel = (row) => {
+    dialogVisibleDel.value=true;
+    storeSno.value=row.sno;
+    console.log('DstoreSno', storeSno);
+    //router.push({name: 'routeName',params:{ cno:row.cno}});
+  };
+
+const handleAdd = () => {
+  dialogVisibleAdd.value=true;
+  //router.push({name: 'routeName',params:{ cno:row.cno}});
+};
+//修改内容处理
+const input1 = ref();
+const input2 = ref();
+const input3 = ref();
+const modify = async()=>{
+  const score ={sno:storeSno.value,cno:storeCno.value,sscore:input1.value};
+  const res = await managerAltScore(score);
+  console.log(res);
+  window.location.reload();
+}
+//删除内容处理
+const del = async()=>{
+  const score ={sno:storeSno.value,cno:storeCno.value,sscore:input1.value};
+  const res = await managerDelScore(score);
+  console.log(res);
+  window.location.reload();
+}
+//添加内容处理
+const add = async()=>{
+  const score ={sno:input2.value,cno:storeCno.value,sscore:input3.value};
+  const res = await managerAddScore(score);
+  console.log(res);
+  window.location.reload();
+}
+
+
 // 从 sessionStorage 获取管理员数据，并调用 API
 const loadManageData = async () => {
   const storedObjectString = sessionStorage.getItem('managerData');
@@ -60,10 +189,12 @@ const loadManageData = async () => {
     // 如果 managerData 有值，则调用 StudentCourseTable API
     if (managerData.value) {
       try {
-        const res = await StudentCourseTable();
+        const route = useRoute(); // 使用 useRoute 获取当前路由
+        storeCno.value=route.params.cno;
+        const course ={cno:storeCno.value};
+        console.log(storeCno.value)
+        const res = await managerEnterCourse(course);
         if (res && res.data) {
-          const route = useRoute(); // 使用 useRoute 获取当前路由
-          storeCno.value=route.params.cno;
           items.value = res.data; 
           console.log(items);
           

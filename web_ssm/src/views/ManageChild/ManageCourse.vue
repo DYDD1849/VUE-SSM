@@ -23,13 +23,13 @@
                 </el-dropdown-menu>
               </template>
             </el-dropdown>
-            <span>{{ teacherData ? teacherData.name : 'Default Name' }}</span>
+            <span>{{ managerData ? managerData.account : 'Default Name' }}</span>
           </div>
         </el-header>
         <el-main>
           我教的课
           <el-scrollbar>
-            <el-table :data="itemster">
+            <el-table :data="items">
               <el-table-column prop="cname" label="课程名" width="120" />
               <el-table-column prop="cno" label="课程号" width="120" />
               <el-table-column prop="semester" label="学期" width="120"/>
@@ -47,15 +47,12 @@
   <script setup>
   import { ref } from 'vue';
   import { ElLink } from 'element-plus';
-  import { teacherMain } from '@/api/main/teacherMain.js';
+  import { CourseTable } from '@/api/main/manager/CourseTable.js';
   import { useRouter } from 'vue-router';
   
-  const teacherData = ref(null);
+  const managerData = ref(null);
   const items = ref(); // 用于存储课程数据的响应式引用
-  const itemster = ref([{
-    cname:'java',
-    cno:1
-  }]);
+
   const router = useRouter();
   // 管理链接点击事件处理函数
   const handleManage = (row) => {
@@ -66,15 +63,15 @@
     // router.push({ name: 'courseManage', params: { courseId: row.cno } });
   };
   // 尝试从 sessionStorage 获取学生数据，并调用 API
-  const loadTeacherData = async () => {
-  const storedObjectString = sessionStorage.getItem('teacherData');
+  const LoadManageData = async () => {
+  const storedObjectString = sessionStorage.getItem('managerData');
   if (storedObjectString) {
-    teacherData.value = JSON.parse(storedObjectString);
+    managerData.value = JSON.parse(storedObjectString);
     
     // 如果 teacherData 有值，则调用 teacherMain API
-    if (teacherData.value) {
+    if (managerData.value) {
       try {
-        const res = await teacherMain(teacherData.value);
+        const res = await CourseTable(managerData.value);
         if (res && res.data) {
           items.value = res.data; 
           console.log(items);
@@ -92,7 +89,7 @@
   };
   
   // 立即调用这个函数
-  loadTeacherData(); // 立即加载数据
+  LoadManageData(); // 立即加载数据
 
   </script>
   <style scoped>
