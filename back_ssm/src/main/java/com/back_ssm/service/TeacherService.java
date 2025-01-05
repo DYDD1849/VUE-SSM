@@ -7,4 +7,5 @@ public interface TeacherService {
     public int addTeacher(Teacher teacher);
     public Teacher findTeacherByTno(String tno);
     public Teacher findTeacherByAccount(String account);
+    public int altTeacher(Teacher teacher);
 }

@@ -3,6 +3,7 @@ package com.back_ssm.mapper;
 import com.back_ssm.pojo.Course;
 import com.back_ssm.pojo.SnoCourse;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
