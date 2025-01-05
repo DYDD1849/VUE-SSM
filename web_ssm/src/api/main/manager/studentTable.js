@@ -5,8 +5,8 @@ export function studentTable(query){
     return request({
         //发送请求
         url:'/findAllStudent',
-        method:'post',
-        data:query
+        method:'get',
+        params:query
     })
 }
 

@@ -1,10 +1,10 @@
 <template>
     <el-container class="layout-container-demo" style="height: 500px">
         <el-header style="text-align: right; font-size: 12px">
-          <div class="searchbar">
+          <div class="searchbar2">
                 <span>搜索教师</span>
                 <el-input
-                v-model="input2"
+                v-model="input0"
                 style="width: 240px"
                 placeholder="搜索教师"
                 :prefix-icon="Search"
@@ -30,7 +30,7 @@
           <el-scrollbar>
             <el-table :data="items">
               <el-table-column prop="tno" label="教工号" width="120" />
-              <el-table-column prop="tname" label="姓名" width="120" />
+              <el-table-column prop="name" label="姓名" width="120" />
               <el-table-column prop="college" label="院系" width="120"/>
               <el-table-column prop="sex" label="性别" width="120"/>
               <el-table-column prop="title" label="职衔" width="120"/>
@@ -51,11 +51,38 @@
     :before-close="handleClose"
   >
   <div class="searchbar">
-                <span>输入新成绩</span>
+                <span>输入新姓名</span>
                 <el-input
                 v-model="input1"
                 style="width: 240px"
-                placeholder="输入成绩"
+                placeholder="输入更改后的姓名"
+                :prefix-icon="Search"
+                />
+  </div>
+  <div class="searchbar">
+                <span>输入新院系</span>
+                <el-input
+                v-model="input2"
+                style="width: 240px"
+                placeholder="输入更改后的院系"
+                :prefix-icon="Search"
+                />
+  </div>
+  <div class="searchbar">
+                <span>输入新性别</span>
+                <el-input
+                v-model="input3"
+                style="width: 240px"
+                placeholder="输入更改后的性别"
+                :prefix-icon="Search"
+                />
+  </div>
+  <div class="searchbar">
+                <span>输入新职衔</span>
+                <el-input
+                v-model="input4"
+                style="width: 240px"
+                placeholder="输入更改后的职衔"
                 :prefix-icon="Search"
                 />
   </div>
@@ -71,13 +98,50 @@
   </template>
   <script setup>
   import { ref } from 'vue';
-  import { teacherTable } from '@/api/main/manager/teacherTable.js';
+  import { teacherTable,UpdateTeacher } from '@/api/main/manager/teacherTable.js';
   
 //管理员信息传递
   const managerData = ref(null);
 //存储所有老师信息
   const items = ref([]); 
+
+//修改老师的信息储存
+  const teacher =ref({});
+  const dialogVisibleAlter = ref(false)
+
+  const input1 = ref();
+  const input2 = ref();
+  const input3 = ref();
+  const input4 = ref();
+// 修改 点击事件处理函数
+const handleAlter = (row) => {
+  dialogVisibleAlter.value=true;
+  teacher.value.tno=row.tno;
+  teacher.value.account=row.account;
+
+  input1.value=row.name;
+  input2.value=row.college;
+  input3.value=row.sex;
+  input4.value=row.title;
   
+  console.log('AstoreSno', teacher.value);
+  //router.push({name: 'routeName',params:{ cno:row.cno}});
+};
+
+const modify = async()=>{
+  teacher.value.name=input1.value;
+  teacher.value.college=input2.value;
+  teacher.value.sex=input3.value;
+  teacher.value.title=input4.value;
+  
+
+  console.log('AfSno', teacher.value);
+
+  const res = await UpdateTeacher(teacher);
+  console.log(res);
+  
+}
+
 // 从 sessionStorage 获取管理员数据，并调用 API
 const loadManageData = async () => {
   const storedObjectString = sessionStorage.getItem('managerData');
@@ -127,8 +191,14 @@ loadManageData(); // 立即加载数据
     height: 100%;
     right: 20px;
   }
-  .layout-container-demo .searchbar {
+  .layout-container-demo .searchbar2 {
     margin-right: 800px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+  .layout-container-demo .searchbar {
     display: inline-flex;
     align-items: center;
     justify-content: center;

@@ -5,8 +5,8 @@ export function teacherTable(query){
     return request({
         //发送请求
         url:'/findAllTeacher',
-        method:'post',
-        data:query
+        method:'get',
+        params:query
     })
 }
 
