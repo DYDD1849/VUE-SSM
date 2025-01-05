@@ -6,7 +6,7 @@ export function studentMain(query){
     
     return request({
         //发送请求
-        url:'/findSnoCourse',
+        url:'/findStudentCourse',
         method:'post',
         data:query
     })

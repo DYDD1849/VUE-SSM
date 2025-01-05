@@ -9,6 +9,9 @@
                 placeholder="搜索学生"
                 :prefix-icon="Search"
                 />
+                <button @click="goToTeacherCourse">返回</button>
+                <button @click="handleAdd">添加</button>
+                {{ storeCno }}
             </div>
           <div class="toolbar">
             <el-dropdown>
@@ -39,8 +42,10 @@
 </template>
 <script setup>
   import { ref } from 'vue';
+  import { useRouter,useRoute } from 'vue-router';
   import { StudentCourseTable } from '@/api/main/manager/StudentCourseTable.js';
-  
+
+  const storeCno =ref(null);
 //管理员信息传递
   const managerData = ref(null);
 //存储所有成绩信息
@@ -57,6 +62,8 @@ const loadManageData = async () => {
       try {
         const res = await StudentCourseTable();
         if (res && res.data) {
+          const route = useRoute(); // 使用 useRoute 获取当前路由
+          storeCno.value=route.params.cno;
           items.value = res.data; 
           console.log(items);
           
@@ -74,6 +81,13 @@ const loadManageData = async () => {
 
 // 立即调用这个函数
 loadManageData(); // 立即加载数据
+
+//路由跳转返回
+const router = useRouter();
+const goToTeacherCourse = () => {
+  router.push("/ManageSCroot");
+};
+
 </script>
 <style scoped>
 /* 列表长度end */

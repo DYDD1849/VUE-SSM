@@ -33,9 +33,15 @@ const routes = [
       component:TeacherMainIndex,
       children:[
         {
-          path: "/TeacherEnterCourse",
+          path:"",
+          component: () => import("../views/TeacherEnterCourse/TeacherCourse.vue"),
+        }
+        ,
+        {
+          path: "/TeacherEnterCourse/:cno",
+          name:'routeName',
           component: () => import("../views/TeacherEnterCourse/TeacherEnterCourse.vue"),
-        },
+        }
       ]
     },
     {
@@ -52,8 +58,20 @@ const routes = [
           component: () => import("../views/ManageChild/ManageTeacher.vue"),
         },
         {
-          path: "/ManageStudentScore",
-          component: () => import("../views/ManageChild/ManageStudentScore.vue"),
+          path: "/ManageSCroot",
+          component: () => import("../views/ManageChild/ManageSCroot.vue"),
+          children:[
+            {
+              path:"",
+              component: () => import("../views/ManageChild/ManageCourse.vue"),
+            }
+            ,
+            {
+              path: "/ManageStudentScore/:cno",
+              name:'routeName',
+              component: () => import("../views/ManageChild/ManageStudentScore.vue"),
+            }
+          ]
         },
       ]
     },

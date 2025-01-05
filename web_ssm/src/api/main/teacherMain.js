@@ -6,7 +6,17 @@ export function teacherMain(query){
     
     return request({
         //发送请求
-        url:'/findTnoCourse',
+        url:'/findTeacherCourse',
+        method:'post',
+        data:query
+    })
+}
+
+export function teacherEnterCourse(query){
+    
+    return request({
+        //发送请求
+        url:'/findStudentScore',
         method:'post',
         data:query
     })

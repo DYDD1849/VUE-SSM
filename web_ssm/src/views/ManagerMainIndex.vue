@@ -17,7 +17,7 @@
               <el-icon><icon-menu /></el-icon>成绩管理
             </template>
             <el-menu-item-group>
-              <el-menu-item index="2-1" @click="goToSCManage">学生成绩</el-menu-item>
+              <el-menu-item index="2-1" @click="goToSCrootManage">学生成绩</el-menu-item>
             </el-menu-item-group>
           </el-sub-menu>
         </el-menu>
@@ -26,6 +26,7 @@
 
     <el-container>
       <el-header style="text-align: right; font-size: 12px">
+        <button @click="quitAction">退出</button>
         <div class="toolbar">
           <el-dropdown>
             <el-icon style="margin-right: 8px; margin-top: 1px">
@@ -70,14 +71,19 @@ LoadManageData();
 
 //路由跳转 学生/教师信息管理/学生成绩
 const router = useRouter();
+//退出按钮
+const quitAction = async()=>{
+  sessionStorage.clear();
+  router.push("/");
+}
 const goToStudentManage = () => {
   router.push('/ManageStudent');
 };
 const goToTeacherManage = () => {
   router.push('/ManageTeacher');
 }
-const goToSCManage = () => {
-  router.push('/ManageStudentScore');
+const goToSCrootManage = () => {
+  router.push('/ManageSCroot');
 }
 </script>
 

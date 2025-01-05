@@ -11,6 +11,7 @@
                 placeholder="搜索你的课程"
                 :prefix-icon="Search"
                 />
+                <button @click="quitAction">退出</button>
             </div>
             
           <div class="toolbar">
@@ -32,15 +33,15 @@
         <el-main>
           <el-scrollbar>
             <el-table :data="items">
-              <el-table-column prop="cname" label="课程名" width="120" />
-              <el-table-column prop="cno" label="课程号" width="120" />
-              <el-table-column prop="credit" label="学分" width="120"/>
-              <el-table-column prop="semester" label="学期" width="120"/>
-              <el-table-column prop="ctime" label="学时" width="120"/>
+              <el-table-column prop="course.cname" label="课程名" width="120" />
+              <el-table-column prop="course.cno" label="课程号" width="120" />
+              <el-table-column prop="course.credit" label="学分" width="120"/>
+              <el-table-column prop="course.semester" label="学期" width="120"/>
+              <el-table-column prop="course.ctime" label="学时" width="120"/>
               <el-table-column prop="sScore" label="成绩" width="120"/>
-              <el-table-column prop="tno" label="教师" width="120">
+              <el-table-column label="教师" width="120">
               <template #default="scope">
-              <el-link href="#" @click="handleManage(scope.row)">{{ scope.row.tno }}</el-link>
+              <el-link href="#" @click="handleManage(scope.row)">{{ scope.row.teacher.name }}</el-link>
             </template>
             </el-table-column>
             </el-table>
@@ -51,10 +52,19 @@
 <script setup>
 import { ref } from 'vue';
 import { studentMain } from '@/api/main/studentMain.js';
- 
+import { useRouter } from 'vue-router';
 const input2 = ref('');
 const studentData = ref(null);
 const items = ref([]); // 用于存储课程数据的响应式引用
+
+
+//路由跳转
+//退出按钮
+const router = useRouter();
+const quitAction = async()=>{
+  sessionStorage.clear();
+  router.push("/");
+}
  
 // 管理链接点击事件处理函数
 const handleManage = (row) => {

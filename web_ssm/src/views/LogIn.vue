@@ -45,7 +45,6 @@
     <span>请选择你的身份</span>
     <template #footer>
       <div class="dialog-footer">
-        
         <el-button type="primary" @click="tostudentreg">
           学生
         </el-button>
@@ -98,7 +97,6 @@ const tip =ref({
 
 // 创建响应式数据
 const user = ref({ account: '', password: '',role:'' });
-// const rs = ref(null); // 通常这个变量可能不是必需的，除非您有特定的用途
  
 // 获取路由实例
 const router = useRouter();
