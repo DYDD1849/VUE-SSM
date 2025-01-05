@@ -31,4 +31,9 @@ public class StudentServiceImpl implements StudentService {
     public List<StudentScoreInCourse> findStudentScoreByCno(String cno) {
         return studentMapper.findStudentScoreByCno(cno);
     }
+
+    @Override
+    public int altStudent(Student student) {
+        return studentMapper.altStudent(student);
+    }
 }

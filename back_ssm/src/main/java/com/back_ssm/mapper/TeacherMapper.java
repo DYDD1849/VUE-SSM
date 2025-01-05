@@ -3,6 +3,7 @@ package com.back_ssm.mapper;
 import com.back_ssm.pojo.Teacher;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 public interface TeacherMapper {
     @Select("select * from teacher where tno=#{tno}")
@@ -12,5 +13,6 @@ public interface TeacherMapper {
     @Insert("INSERT INTO teacher (tno, name, college, sex, title, account) " +
             "VALUES (#{tno}, #{name}, #{college}, #{sex}, #{title}, #{account})")
     public int addTeacher(Teacher teacher);
-
+    @Update("update teacher set name = #{name}, college = #{college}, sex = #{sex}, title = #{title} where tno = #{tno}")
+    public int altTeacher(Teacher teacher);
 }

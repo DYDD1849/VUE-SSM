@@ -24,4 +24,9 @@ public class TeacherServiceImpl implements TeacherService {
     public Teacher findTeacherByAccount(String account) {
         return teacherMapper.findTeacherByAccount(account);
     }
+
+    @Override
+    public int altTeacher(Teacher teacher) {
+        return teacherMapper.altTeacher(teacher);
+    }
 }

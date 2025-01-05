@@ -4,6 +4,7 @@ import com.back_ssm.pojo.Student;
 import com.back_ssm.pojo.StudentScoreInCourse;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -16,4 +17,6 @@ public interface StudentMapper {
     public List<StudentScoreInCourse> findStudentScoreByCno(String cno);
     @Insert("INSERT INTO student VALUES (#{sno}, #{name}, #{account}, #{sex}, #{college}, #{major}, #{phone}, #{address})")
     public int addStudent(Student student);
+    @Update("update student set name = #{name},sex = #{sex},college = #{college},major = #{major},phone = #{phone},address = #{address} where sno = #{sno}")
+    public int altStudent(Student student);
 }
