@@ -1,32 +1,30 @@
 import request from "@/api";
 
-//新增用户
-//查询用户列表
-export function studentLogIn(query){
+export function TeacherAltScore(query){
     
     return request({
         //发送请求
-        url:'/studentLogin',
+        url:'/altScore',
         method:'post',
         data:query
     })
 }
 
-export function teacherLogIn(query){
+export function TeacherDelScore(query){
     
     return request({
         //发送请求
-        url:'/teacherLogin',
+        url:'/delScore',
         method:'post',
         data:query
     })
 }
 
-export function managerLogIn(query){
+export function TeacherAddScore(query){
     
     return request({
         //发送请求
-        url:'/MangerLogin',
+        url:'/addScore',
         method:'post',
         data:query
     })

@@ -1,6 +1,11 @@
 import LogIn from "@/views/LogIn.vue";
 import { createRouter, createWebHistory } from "vue-router";
-import MainIndex from "@/views/MainIndex.vue";
+import studentReg from "@/views/StudentReg.vue";
+import teacherReg from "@/views/TeacherReg.vue";
+import StudentMainIndex from "@/views/StudentMainIndex.vue";
+import TeacherMainIndex from "@/views/TeacherMainIndex.vue";
+import ManagerMainIndex from "@/views/ManagerMainIndex.vue";
+
 const routes = [
     {
       path:"/",
@@ -8,9 +13,67 @@ const routes = [
       component:LogIn,
     },
     {
-      path:"/main",
-      name:"main",
-      component:MainIndex
+      path:"/studentReg",
+      name:"studentReg",
+      component:studentReg,
+    },
+    {
+      path:"/teacherReg",
+      name:"teacherReg",
+      component:teacherReg,
+    },
+    {
+      path:"/StudentMain",
+      name:"studentMain",
+      component:StudentMainIndex,
+    },
+    {
+      path:"/TeacherMain",
+      name:"teacherMain",
+      component:TeacherMainIndex,
+      children:[
+        {
+          path:"",
+          component: () => import("../views/TeacherEnterCourse/TeacherCourse.vue"),
+        }
+        ,
+        {
+          path: "/TeacherEnterCourse/:cno",
+          name:'routeName',
+          component: () => import("../views/TeacherEnterCourse/TeacherEnterCourse.vue"),
+        }
+      ]
+    },
+    {
+      path:"/ManagerMain",
+      name:"managerMain",
+      component:ManagerMainIndex,
+      children:[
+        {
+          path: "/ManageStudent",
+          component: () => import("../views/ManageChild/ManageStudent.vue"),
+        },
+        {
+          path: "/ManageTeacher",
+          component: () => import("../views/ManageChild/ManageTeacher.vue"),
+        },
+        {
+          path: "/ManageSCroot",
+          component: () => import("../views/ManageChild/ManageSCroot.vue"),
+          children:[
+            {
+              path:"",
+              component: () => import("../views/ManageChild/ManageCourse.vue"),
+            }
+            ,
+            {
+              path: "/ManageStudentScore/:cno",
+              name:'routeName',
+              component: () => import("../views/ManageChild/ManageStudentScore.vue"),
+            }
+          ]
+        },
+      ]
     },
   // {
   //   path: "/",
