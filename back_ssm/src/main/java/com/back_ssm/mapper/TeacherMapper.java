@@ -10,7 +10,7 @@ public interface TeacherMapper {
     public Teacher findTeacherByTno(String tno);
     @Select("select * from teacher where account=#{account}")
     public Teacher findTeacherByAccount(String account);
-    @Insert("INSERT INTO teacher (tno, name, college, sex, title, cno, account) " +
+    @Insert("INSERT INTO teacher (tno, name, college, sex, title, account) " +
             "VALUES (#{tno}, #{name}, #{college}, #{sex}, #{title}, #{account})")
     public int addTeacher(Teacher teacher);
     @Update("update teacher set name = #{name}, college = #{college}, sex = #{sex}, title = #{title} where tno = #{tno}")
