@@ -37,10 +37,39 @@
               <el-table-column prop="major" label="专业" width="120"/>
               <el-table-column prop="phone" label="手机" width="120"/>
               <el-table-column prop="address" label="地址" width="120"/>
+              <el-table-column width="120">
+              <template #default="scope">
+                <el-link href="#" @click="handleAlter(scope.row)">修改</el-link>
+              </template>
+              </el-table-column>
             </el-table>
           </el-scrollbar>
         </el-main>
     </el-container>
+    <el-dialog
+    v-model="dialogVisibleAlter"
+    title="Tips"
+    width="500"
+    :before-close="handleClose"
+  >
+  <div class="searchbar">
+                <span>输入新成绩</span>
+                <el-input
+                v-model="input1"
+                style="width: 240px"
+                placeholder="输入成绩"
+                :prefix-icon="Search"
+                />
+  </div>
+    <template #footer>
+      <div class="dialog-footer">
+        <el-button type="primary" @click="modify">
+          修改
+        </el-button>
+        <el-button @click="dialogVisibleAlter = false">取消</el-button>
+      </div>
+    </template>
+  </el-dialog>
 </template>
 <script setup>
 import { ref } from 'vue';
