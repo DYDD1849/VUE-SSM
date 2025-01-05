@@ -59,8 +59,7 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { studentLogIn } from "@/api/user/login.js";
-import { teacherLogIn } from "@/api/user/login.js";
+import { studentLogIn,teacherLogIn,managerLogIn } from "@/api/user/login.js";
 import { ElMessageBox } from 'element-plus'
 
 const dialogVisible = ref(false)
@@ -112,7 +111,7 @@ const input = async () => {
       res = await teacherLogIn(user.value);
     }
     else if(user.value.role=='3'){
-      res = await studentLogIn(user.value);
+      res = await managerLogIn(user.value);
     }
     else
     {

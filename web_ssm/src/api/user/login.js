@@ -21,3 +21,13 @@ export function teacherLogIn(query){
         data:query
     })
 }
+
+export function managerLogIn(query){
+    
+    return request({
+        //发送请求
+        url:'/MangerLogin',
+        method:'post',
+        data:query
+    })
+}
