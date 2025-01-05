@@ -5,9 +5,12 @@ import com.back_ssm.pojo.Teacher;
 import com.back_ssm.service.StudentService;
 import com.back_ssm.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 
 public class MangeController {
@@ -28,5 +31,15 @@ public class MangeController {
         if(teacherService.findTeacherByTno(teacher.getTno())!=null)
             return teacherService.altTeacher(teacher);
         return 0;
+    }
+    @GetMapping(value = "/findAllStudent")
+    @ResponseBody
+    public List<Student> findAllStudent(){
+        return studentService.findAllStudent();
+    }
+    @GetMapping(value = "/findAllTeacher")
+    @ResponseBody
+    public List<Teacher> findAllTeacher(){
+        return teacherService.findAllTeacher();
     }
 }

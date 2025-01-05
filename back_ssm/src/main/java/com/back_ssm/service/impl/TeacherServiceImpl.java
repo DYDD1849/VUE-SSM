@@ -6,6 +6,8 @@ import com.back_ssm.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TeacherServiceImpl implements TeacherService {
     @Autowired
@@ -28,5 +30,10 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public int altTeacher(Teacher teacher) {
         return teacherMapper.altTeacher(teacher);
+    }
+
+    @Override
+    public List<Teacher> findAllTeacher() {
+        return teacherMapper.findAllTeacher();
     }
 }

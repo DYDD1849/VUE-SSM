@@ -19,4 +19,6 @@ public interface StudentMapper {
     public int addStudent(Student student);
     @Update("update student set name = #{name},sex = #{sex},college = #{college},major = #{major},phone = #{phone},address = #{address} where sno = #{sno}")
     public int altStudent(Student student);
+    @Select("select * from student")
+    public List<Student> findAllStudent();
 }
