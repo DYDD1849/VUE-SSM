@@ -1,21 +1,13 @@
 <template>
   <el-container class="layout-container-demo">
     <el-header style="text-align: right; font-size: 12px">
-        <button @click="quitAction">退出</button>
         <div class="toolbar">
-          <el-dropdown>
-            <el-icon style="margin-right: 8px; margin-top: 1px">
-              <setting />
-            </el-icon>
-            <template #dropdown>
-              <el-dropdown-menu>
-                <el-dropdown-item>View</el-dropdown-item>
-                <el-dropdown-item>Add</el-dropdown-item>
-                <el-dropdown-item>Delete</el-dropdown-item>
-              </el-dropdown-menu>
-            </template>
-          </el-dropdown>
-          <span>{{ managerData ? managerData.account : 'Default Name' }}</span>
+          <el-text class="mx-1" type="primary" size="large" style="margin-right: 50px;">
+            {{ managerData ? managerData.account : 'Default Name' }}
+          </el-text>
+          <div class="mb-4">
+            <el-button type="primary" plain @click="quitAction">退出</el-button>
+          </div>
         </div>
     </el-header>
       <el-container>
@@ -53,7 +45,7 @@
 
 <script setup>
 import {ref} from 'vue'
-import { Menu as IconMenu, Message, Setting } from '@element-plus/icons-vue'
+import { Menu as IconMenu, Message } from '@element-plus/icons-vue'
 import { useRouter } from 'vue-router';
 
 const managerData = ref(null);
@@ -92,6 +84,7 @@ const goToSCrootManage = () => {
   color: var(--el-text-color-primary);
 }
 .layout-container-demo .el-aside {
+  height: 100%;
   color: var(--el-text-color-primary);
   background: var(--el-color-primary-light-8);
 }

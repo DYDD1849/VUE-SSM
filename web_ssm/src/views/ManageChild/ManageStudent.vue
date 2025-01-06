@@ -1,15 +1,17 @@
 <template>
     <el-container>
         <el-header style="text-align: right; font-size: 12px">
-            <div class="searchbar2">
-                <span>搜索学生</span>
-                <el-input
-                v-model="input0"
-                style="width: 240px"
-                placeholder="搜索学生"
-                :prefix-icon="Search"
-                />
+          <div class="toolbar">
+            <div class="mt-4" style="margin-right: 1000px;">
+                  <el-input
+                    v-model="input0"
+                    style="max-width: 240px"
+                    placeholder="搜索学生"
+                    class="input-with-select"
+                  >
+                  </el-input>
             </div>
+          </div>
         </el-header>
         <el-main>
           <el-scrollbar>
@@ -190,7 +192,7 @@ loadManageData(); // 立即加载数据
 /* 列表长度end */
 .layout-container-demo .el-header {
   position: relative;
-  background-color: var(--el-color-primary-light-7);
+  background-color: rgba(#FFFFFF);
   color: var(--el-text-color-primary);
 }
 
@@ -206,13 +208,6 @@ loadManageData(); // 立即加载数据
     right: 20px;
   }
 
-  .layout-container-demo .searchbar2 {
-    margin-right: 800px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-  }
   .layout-container-demo .searchbar {
     display: inline-flex;
     align-items: center;
