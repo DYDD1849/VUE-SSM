@@ -19,3 +19,13 @@ export function UpdateStudent(query){
         data:query
     })
 }
+
+export function searchStudent(query){
+    
+    return request({
+        //发送请求
+        url:'/searchStudent',
+        method:'post',
+        data:query
+    })
+}

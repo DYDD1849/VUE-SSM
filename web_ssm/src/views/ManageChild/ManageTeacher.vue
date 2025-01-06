@@ -9,6 +9,11 @@
                     placeholder="搜索教师"
                     class="input-with-select"
                   >
+                  <template #append>
+                  <el-button :icon="Search" @click="SearchTeacher">
+                    搜索
+                  </el-button>
+                  </template>
                   </el-input>
             </div>
           </div>
@@ -85,7 +90,7 @@
   </template>
   <script setup>
   import { ref } from 'vue';
-  import { teacherTable,UpdateTeacher } from '@/api/main/manager/teacherTable.js';
+  import { teacherTable,UpdateTeacher,searchTeacher } from '@/api/main/manager/teacherTable.js';
   
 //管理员信息传递
   const managerData = ref(null);
@@ -96,10 +101,20 @@
   const teacher =ref({});
   const dialogVisibleAlter = ref(false)
 
+  const input0 = ref();
   const input1 = ref();
   const input2 = ref();
   const input3 = ref();
   const input4 = ref();
+
+  //搜索功能
+const SearchTeacher =async()=>{
+  console.log("input",input0.value)
+  const teacher={name:input0.value}
+  const res = await searchTeacher(teacher);
+  items.value=res.data;
+  console.log("name",res);
+}
 // 修改 点击事件处理函数
 const handleAlter = (row) => {
   dialogVisibleAlter.value=true;

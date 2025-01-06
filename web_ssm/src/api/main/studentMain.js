@@ -11,3 +11,14 @@ export function studentMain(query){
         data:query
     })
 }
+
+export function searchStudentScore(query){
+    
+    return request({
+        //发送请求
+        url:'/searchStudentScore',
+        method:'post',
+        data:query
+    })
+}
+

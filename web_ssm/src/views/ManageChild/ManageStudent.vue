@@ -10,7 +10,7 @@
                     class="input-with-select"
                   >
                   <template #append>
-                    <el-button >搜索</el-button>
+                    <el-button @click="SearchStudent">搜索</el-button>
                   </template>
                   </el-input>
             </div>
@@ -108,7 +108,7 @@
 </template>
 <script setup>
 import { ref } from 'vue';
-import { studentTable,UpdateStudent } from '@/api/main/manager/studentTable.js';
+import { studentTable,UpdateStudent,searchStudent } from '@/api/main/manager/studentTable.js';
  
 // const input2 = ref('');
 
@@ -122,12 +122,22 @@ const items = ref([]);
   const student =ref({});
   const dialogVisibleAlter = ref(false)
 
+  const input0 = ref();
   const input1 = ref();
   const input2 = ref();
   const input3 = ref();
   const input4 = ref();
   const input5 = ref();
   const input6 = ref();
+
+  //搜索功能
+  const SearchStudent =async()=>{
+  console.log("input",input0.value)
+  const student={name:input0.value}
+  const res = await searchStudent(student);
+  items.value=res.data;
+  console.log("name",res);
+}  
 // 修改 点击事件处理函数
 const handleAlter = (row) => {
   dialogVisibleAlter.value=true;

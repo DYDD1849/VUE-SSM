@@ -19,3 +19,13 @@ export function UpdateTeacher(query){
         data:query
     })
 }
+
+export function searchTeacher(query){
+    
+    return request({
+        //发送请求
+        url:'/searchTeacher',
+        method:'post',
+        data:query
+    })
+}

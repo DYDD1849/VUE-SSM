@@ -2,6 +2,12 @@
     <el-container class="layout-container-demo" style="height: 100%">
         <el-header style="text-align: right; font-size: 12px">
           <div class="toolbar">
+            <el-button :icon="Search" @click="goToTeacherCourse">
+                返回
+            </el-button>
+            <el-button :icon="Search" @click="handleAdd">
+                    添加
+            </el-button>
             <div class="mt-4" style="margin-right: 10%;">
                 <el-input
                   v-model="input0"
@@ -9,14 +15,9 @@
                   placeholder="搜索学生"
                   class="input-with-select"
                 >
-                <template #prepend>
-                  <el-button :icon="Search" @click="goToTeacherCourse">
-                    返回
-                  </el-button>
-                </template>
                 <template #append>
-                  <el-button :icon="Search" @click="handleAdd">
-                    添加
+                  <el-button :icon="Search" @click="SearchStudent">
+                    搜索
                   </el-button>
                 </template>
               </el-input>
@@ -124,7 +125,7 @@
   import { ref} from 'vue';
   import { teacherEnterCourse } from '@/api/main/teacherMain.js';
   import { useRouter,useRoute } from 'vue-router';
-  import {TeacherAltScore,TeacherDelScore,TeacherAddScore} from '@/api/main/teacherDoSC/scoreUpdate.js';
+  import {TeacherAltScore,TeacherDelScore,TeacherAddScore,TeacherSearchStudent} from '@/api/main/teacherDoSC/scoreUpdate.js';
 //教师信息传递
   const teacherData = ref(null);
 //存储所有成绩信息
@@ -139,8 +140,6 @@
 // 跳转聊天函数
 const handleManage = (row) => {
   console.log('Managing tea:', row.account);
-
-  
    router.push({name: 'GoChat',params:{id:row.account}});
 };
 
@@ -163,10 +162,21 @@ const handleAdd = () => {
   dialogVisibleAdd.value=true;
   //router.push({name: 'routeName',params:{ cno:row.cno}});
 };
-//修改内容处理
+
+const input0 = ref();
+
 const input1 = ref();
 const input2 = ref();
 const input3 = ref();
+//搜索功能
+const SearchStudent =async()=>{
+  console.log("input",input0.value)
+  const student={name:input0.value}
+  const res = await TeacherSearchStudent(student);
+  items.value=res.data;
+  console.log("name",res);
+}
+//修改内容处理
 const modify = async()=>{
   const score ={sno:storeSno.value,cno:storeCno.value,sscore:input1.value};
   const res = await TeacherAltScore(score);
