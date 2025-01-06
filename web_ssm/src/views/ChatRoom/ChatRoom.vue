@@ -15,6 +15,7 @@
     </div>
 </template>
 <script>
+import {ref} from 'vue'
 export default{
     name:"ChatRoom",
     data(){
@@ -29,8 +30,13 @@ export default{
     },
     methods:{
         gotoChat:function(){
+            const role=ref(JSON.parse(sessionStorage.getItem('studentData'))!=null?1:2)
+            
             console.log("ss",this.id)
-            this.$router.push({name:"ChatRoomToChat",params:{id:this.id}})
+            if (role.value==1)
+            this.$router.push({name:"StudentToChat",params:{id:this.id}})
+            else
+            this.$router.push({name:"TeacherToChat",params:{id:this.id}})
         }
     }
     

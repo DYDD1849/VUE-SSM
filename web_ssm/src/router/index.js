@@ -40,7 +40,7 @@ const routes = [
           children:[
             {
             path:"/GoChat/:id",
-            name:"ChatRoomToChat",
+            name:"StudentToChat",
             component:ChatTest,
             }
           ]
@@ -70,7 +70,7 @@ const routes = [
           children:[
             {
             path:"/GoChat/:id",
-            name:"ChatRoomToChat",
+            name:"TeacherToChat",
             component:ChatTest,
             }
           ]

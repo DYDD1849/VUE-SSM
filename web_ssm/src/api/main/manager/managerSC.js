@@ -38,3 +38,13 @@ export function managerAddScore(query){
         data:query
     })
 }
+
+export function managerSearchScore(query){
+    
+    return request({
+        //发送请求
+        url:'/searchStudentScoreByCnoSname',
+        method:'post',
+        data:query
+    })
+}

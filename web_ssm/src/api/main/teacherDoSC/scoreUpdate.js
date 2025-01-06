@@ -30,11 +30,11 @@ export function TeacherAddScore(query){
     })
 }
 
-export function TeacherSearchStudent(query){
+export function searchStudentScoreByCnoSname(query){
     
     return request({
         //发送请求
-        url:'/searchStudent',
+        url:'/searchStudentScoreByCnoSname',
         method:'post',
         data:query
     })
