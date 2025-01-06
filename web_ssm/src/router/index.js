@@ -5,6 +5,7 @@ import StudentMainIndex from "@/views/StudentMainIndex.vue";
 import TeacherMainIndex from "@/views/TeacherMainIndex.vue";
 import ManagerMainIndex from "@/views/ManagerMainIndex.vue";
 import LogIn from "@/views/LogIn.vue";
+import ChatTest from "@/views/chatTest.vue";
 
 const routes = [
     {
@@ -28,6 +29,11 @@ const routes = [
       component:StudentMainIndex,
     },
     {
+      path:"/GoChat/:id",
+      name:"GoChat",
+      component:ChatTest,
+    },
+    {
       path:"/TeacherMain",
       name:"teacherMain",
       component:TeacherMainIndex,
@@ -39,7 +45,7 @@ const routes = [
         ,
         {
           path: "/TeacherEnterCourse/:cno",
-          name:'routeName',
+          name:'TeacherEnterCourse',
           component: () => import("../views/TeacherEnterCourse/TeacherEnterCourse.vue"),
         }
       ]
@@ -68,7 +74,7 @@ const routes = [
             ,
             {
               path: "/ManageStudentScore/:cno",
-              name:'routeName',
+              name:'ManageStudentScore',
               component: () => import("../views/ManageChild/ManageStudentScore.vue"),
             }
           ]
