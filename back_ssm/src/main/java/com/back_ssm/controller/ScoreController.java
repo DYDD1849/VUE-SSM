@@ -2,6 +2,7 @@ package com.back_ssm.controller;
 
 import com.back_ssm.pojo.Course;
 import com.back_ssm.pojo.Score;
+import com.back_ssm.pojo.Student;
 import com.back_ssm.pojo.StudentScoreInCourse;
 import com.back_ssm.service.ScoreService;
 import com.back_ssm.service.StudentService;
@@ -24,6 +25,13 @@ public class ScoreController {
     public List<StudentScoreInCourse> getStudentScore(@RequestBody Course course){
         return studentService.findStudentScoreByCno(course.getCno());
     }
+
+    @PostMapping(value = "/searchStudentScore")
+    @ResponseBody
+    public List<StudentScoreInCourse> getStudentScore(@RequestBody Student student){
+        return studentService.searchStudentScore(student);
+    }
+
 
     @PostMapping(value = "/addScore")
     @ResponseBody

@@ -11,6 +11,7 @@ public interface StudentService {
     public int addStudent(Student student);
     public Student findStudentByAccount(String Account);
     public List<StudentScoreInCourse> findStudentScoreByCno(String cno);
+    public List<StudentScoreInCourse> searchStudentScore(Student student);
     public int altStudent(Student student);
     public List<Student> findAllStudent();
     public List<Student> searchStudentByName(String name);

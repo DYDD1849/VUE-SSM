@@ -33,6 +33,11 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public List<StudentScoreInCourse> searchStudentScore(Student student) {
+        return studentMapper.searchStudentScore(student);
+    }
+
+    @Override
     public int altStudent(Student student) {
         return studentMapper.altStudent(student);
     }
