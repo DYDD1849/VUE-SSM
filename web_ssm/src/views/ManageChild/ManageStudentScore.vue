@@ -2,21 +2,22 @@
     <el-container>
         <el-header style="text-align: right; font-size: 12px">
           <div class="toolbar">
-            <div class="mt-4" style="margin-right: 10%;">
+            <el-button :icon="Search" @click="handleAdd">
+                    添加
+            </el-button>
+            <el-button :icon="Search" @click="goToTeacherCourse" style="margin-right:50px">
+                    返回
+                  </el-button>
+                <div class="mt-4" style="margin-right: 10%;">
                 <el-input
                   v-model="input0"
                   style="max-width: 320px"
                   placeholder="搜索学生"
                   class="input-with-select"
                 >
-                <template #prepend>
-                  <el-button :icon="Search" @click="goToTeacherCourse">
-                    返回
-                  </el-button>
-                </template>
                 <template #append>
-                  <el-button :icon="Search" @click="handleAdd">
-                    添加
+                  <el-button :icon="Search" @click="SearchStudent">
+                    搜索
                   </el-button>
                 </template>
               </el-input>

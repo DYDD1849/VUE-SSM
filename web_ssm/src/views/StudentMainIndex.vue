@@ -2,39 +2,19 @@
     <el-container class="layout-container-demo" style="height: 100%">
         <el-header style="text-align: right; font-size: 12px">
           <div class="toolbar">
-            <div class="mt-4" style="margin-right: 1100px;">
-              <el-input
-                    v-model="input0"
-                    style="max-width: 320px"
-                    placeholder="搜索你的课程"
-                    class="input-with-select"
-                  >
-              </el-input>
-            </div>
-            <div class="mb-4">
-              <el-button type="primary" plain @click="quitAction">退出</el-button>
+            <div class="mb-4" style="margin-right: 50px;">
+              <el-button type="primary" plain @click="gotoChat">邮箱</el-button>
             </div>
             <el-text class="mx-1" type="primary" size="large" style="margin-right: 50px;">
               {{ studentData ? studentData.name : 'Default Name' }}
             </el-text>
+            <div class="mb-4" style="margin-right: 50px;">
+              <el-button type="primary" plain @click="quitAction">退出</el-button>
+            </div>
           </div>
         </el-header>
         <el-main>
-          <el-scrollbar>
-            <el-table :data="items">
-              <el-table-column prop="course.cname" label="课程名" width="120" />
-              <el-table-column prop="course.cno" label="课程号" width="120" />
-              <el-table-column prop="course.credit" label="学分" width="120"/>
-              <el-table-column prop="course.semester" label="学期" width="120"/>
-              <el-table-column prop="course.ctime" label="学时" width="120"/>
-              <el-table-column prop="sScore" label="成绩" width="120"/>
-              <el-table-column label="教师" width="120">
-              <template #default="scope">
-              <el-link href="#" @click="handleManage(scope.row)">{{ scope.row.teacher.name }}</el-link>
-            </template>
-            </el-table-column>
-            </el-table>
-          </el-scrollbar>
+          <router-view />
         </el-main>
     </el-container>
 </template>
@@ -46,23 +26,21 @@ import { useRouter } from 'vue-router';
 const studentData = ref(null);
 const items = ref([]); // 用于存储课程数据的响应式引用
 
-
 //路由跳转
+
+  
+
 //退出按钮
 const router = useRouter();
+
+    //邮箱
+    const gotoChat = async()=> {
+    router.push({name:"ChatRoomS"});
+    }
 const quitAction = async()=>{
   sessionStorage.clear();
   router.push("/");
 }
- 
-// 跳转聊天函数
-const handleManage = (row) => {
-  console.log('Managing tea:', row.teacher.account);
-  // 这里可以添加跳转到管理页面的逻辑，例如使用 vue-router 导航到一个管理详情页面
-  // router.push({ name: 'courseManage', params: { courseId: row.cno } });
-  
-   router.push({name: 'GoChat',params:{id:row.teacher.account}});
-};
 
 // 尝试从 sessionStorage 获取学生数据，并调用 API
 const loadStudentData = async () => {

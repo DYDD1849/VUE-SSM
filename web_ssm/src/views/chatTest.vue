@@ -36,10 +36,8 @@
         </div>
       </div>
       <br />
-      <el-container>
-        <el-footer >
+      <el-affix class="affixcolor" :offset="50" position="bottom">
         <div class="mt-4">
-
             <el-input
               v-model="textareaMsg"
               size="large"
@@ -59,8 +57,9 @@
               </template>
             </el-input>
           </div>
-        </el-footer>
-        </el-container>
+      </el-affix>
+
+
     </div>
   </template>
   <script>
@@ -234,6 +233,9 @@
   
   .examineeFace_logo_style {
     width: 30px;
+  }
+  .affixcolor{
+    background-color: rgb(243.9, 244.2, 244.8);
   }
   </style>
   

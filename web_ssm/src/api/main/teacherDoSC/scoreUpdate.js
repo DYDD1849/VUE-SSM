@@ -29,3 +29,13 @@ export function TeacherAddScore(query){
         data:query
     })
 }
+
+export function TeacherSearchStudent(query){
+    
+    return request({
+        //发送请求
+        url:'/searchStudent',
+        method:'post',
+        data:query
+    })
+}
