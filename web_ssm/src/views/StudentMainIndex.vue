@@ -12,6 +12,11 @@
                     placeholder="搜索你的课程"
                     class="input-with-select"
                   >
+                  <template #append>
+                  <el-button :icon="Search" @click="SearchCourse">
+                    搜索
+                  </el-button>
+                </template>
               </el-input>
             </div>
             <div class="mb-4">
@@ -43,13 +48,20 @@
 </template>
 <script setup>
 import { ref } from 'vue';
-import { studentMain } from '@/api/main/studentMain.js';
+import { studentMain,searchStudentScore } from '@/api/main/studentMain.js';
 import { useRouter } from 'vue-router';
 
 const studentData = ref(null);
 const items = ref([]); // 用于存储课程数据的响应式引用
+const input0 =ref();
 
-
+const SearchCourse =async()=>{
+  console.log("input",input0.value)
+  const student={name:input0.value,sno:studentData.value.sno}
+  const res = await searchStudentScore(student);
+  items.value=res.data;
+  console.log("name",res);
+}
 //路由跳转
 //退出按钮
 const router = useRouter();

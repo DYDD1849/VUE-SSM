@@ -5,6 +5,9 @@
             <el-button :icon="Search" @click="goToTeacherCourse">
                 返回
             </el-button>
+            <el-button :icon="Search" @click="handleAdd">
+                    添加
+            </el-button>
             <div class="mt-4" style="margin-right: 10%;">
                 <el-input
                   v-model="input0"
@@ -12,14 +15,9 @@
                   placeholder="搜索学生"
                   class="input-with-select"
                 >
-                <template #prepend>
+                <template #append>
                   <el-button :icon="Search" @click="SearchStudent">
                     搜索
-                  </el-button>
-                </template>
-                <template #append>
-                  <el-button :icon="Search" @click="handleAdd">
-                    添加
                   </el-button>
                 </template>
               </el-input>
@@ -173,8 +171,9 @@ const input3 = ref();
 //搜索功能
 const SearchStudent =async()=>{
   console.log("input",input0.value)
-  const name=input0.value
-  const res = await TeacherSearchStudent(name);
+  const student={name:input0.value}
+  const res = await TeacherSearchStudent(student);
+  items.value=res.data;
   console.log("name",res);
 }
 //修改内容处理
