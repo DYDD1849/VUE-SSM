@@ -15,7 +15,7 @@ public class StudentServiceImpl implements StudentService {
     StudentMapper studentMapper;
     @Override
     public Student findStudentBySno(String sno) {
-        return studentMapper.findStudentByAccount(sno);
+        return studentMapper.findStudentBySno(sno);
     }
     @Override
     public int addStudent(Student student) {

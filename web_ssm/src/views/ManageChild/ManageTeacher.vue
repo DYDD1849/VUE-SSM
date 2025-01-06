@@ -44,7 +44,7 @@
           </el-scrollbar>
         </el-main>
     </el-container>
-    <el-dialog
+  <el-dialog
     v-model="dialogVisibleAlter"
     title="Tips"
     width="500"
@@ -137,8 +137,9 @@ const modify = async()=>{
 
   console.log('AfSno', teacher.value);
 
-  const res = await UpdateTeacher(teacher);
+  const res = await UpdateTeacher(teacher.value);
   console.log(res);
+  window.location.reload();
   
 }
 

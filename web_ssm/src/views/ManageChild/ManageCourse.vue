@@ -59,7 +59,7 @@
     console.log('Managing course:', row);
     
     
-    router.push({name: 'routeName',params:{ cno:row.cno}});
+    router.push({name: 'ManageStudentScore',params:{ cno:row.cno}});
     // router.push({ name: 'courseManage', params: { courseId: row.cno } });
   };
   // 尝试从 sessionStorage 获取学生数据，并调用 API
