@@ -5,7 +5,7 @@ import StudentMainIndex from "@/views/StudentMainIndex.vue";
 import TeacherMainIndex from "@/views/TeacherMainIndex.vue";
 import ManagerMainIndex from "@/views/ManagerMainIndex.vue";
 import LogIn from "@/views/LogIn.vue";
-import ChatTest from "@/views/ChatRoom/chatTest.vue";
+import ChatTest from "@/views/chatTest.vue";
 
 const routes = [
     {

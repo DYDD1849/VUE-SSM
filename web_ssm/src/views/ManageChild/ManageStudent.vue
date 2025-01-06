@@ -2,13 +2,16 @@
     <el-container>
         <el-header style="text-align: right; font-size: 12px">
           <div class="toolbar">
-            <div class="mt-4" style="margin-right: 1000px;">
+            <div class="mt-4" style="margin-right: 10%;">
                   <el-input
                     v-model="input0"
                     style="max-width: 240px"
                     placeholder="搜索学生"
                     class="input-with-select"
                   >
+                  <template #append>
+                    <el-button >搜索</el-button>
+                  </template>
                   </el-input>
             </div>
           </div>
