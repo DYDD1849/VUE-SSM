@@ -1,10 +1,10 @@
 <template>
     <el-container class="layout-container-demo" style="height: 500px">
         <el-header style="text-align: right; font-size: 12px">
-            <div class="searchbar">
+            <div class="searchbar2">
                 <span>搜索学生</span>
                 <el-input
-                v-model="input2"
+                v-model="input0"
                 style="width: 240px"
                 placeholder="搜索学生"
                 :prefix-icon="Search"
@@ -53,11 +53,56 @@
     :before-close="handleClose"
   >
   <div class="searchbar">
-                <span>输入新成绩</span>
+                <span>输入新姓名</span>
                 <el-input
                 v-model="input1"
                 style="width: 240px"
-                placeholder="输入成绩"
+                placeholder="输入更改后的姓名"
+                :prefix-icon="Search"
+                />
+  </div>
+  <div class="searchbar">
+                <span>输入新性别</span>
+                <el-input
+                v-model="input2"
+                style="width: 240px"
+                placeholder="输入更改后的性别"
+                :prefix-icon="Search"
+                />
+  </div>
+  <div class="searchbar">
+                <span>输入新学院</span>
+                <el-input
+                v-model="input3"
+                style="width: 240px"
+                placeholder="输入更改后的学院"
+                :prefix-icon="Search"
+                />
+  </div>
+  <div class="searchbar">
+                <span>输入新专业</span>
+                <el-input
+                v-model="input4"
+                style="width: 240px"
+                placeholder="输入更改后的专业"
+                :prefix-icon="Search"
+                />
+  </div>
+  <div class="searchbar">
+                <span>输入新手机</span>
+                <el-input
+                v-model="input5"
+                style="width: 240px"
+                placeholder="输入更改后的手机"
+                :prefix-icon="Search"
+                />
+  </div>
+  <div class="searchbar">
+                <span>输入新地址</span>
+                <el-input
+                v-model="input6"
+                style="width: 240px"
+                placeholder="输入更改后的地址"
                 :prefix-icon="Search"
                 />
   </div>
@@ -73,9 +118,9 @@
 </template>
 <script setup>
 import { ref } from 'vue';
-import { studentTable } from '@/api/main/manager/studentTable.js';
+import { studentTable,UpdateStudent } from '@/api/main/manager/studentTable.js';
  
-const input2 = ref('');
+// const input2 = ref('');
 
 //管理员信息传递
 const managerData = ref(null);
@@ -83,6 +128,49 @@ const managerData = ref(null);
 //存储所有学生信息
 const items = ref([]);
  
+//修改学生的信息储存
+  const student =ref({});
+  const dialogVisibleAlter = ref(false)
+
+  const input1 = ref();
+  const input2 = ref();
+  const input3 = ref();
+  const input4 = ref();
+  const input5 = ref();
+  const input6 = ref();
+// 修改 点击事件处理函数
+const handleAlter = (row) => {
+  dialogVisibleAlter.value=true;
+  student.value.sno=row.sno;
+  student.value.account=row.account;
+
+  input1.value=row.name;
+  input2.value=row.sex;
+  input3.value=row.college;
+  input4.value=row.major;
+  input5.value=row.phone;
+  input6.value=row.address;
+  
+  console.log('AstoreSno', student.value);
+  //router.push({name: 'routeName',params:{ cno:row.cno}});
+};
+
+const modify = async()=>{
+  student.value.name=input1.value;
+  student.value.sex=input2.value;
+  student.value.college=input3.value;
+  student.value.major=input4.value;
+  student.value.phone=input5.value;
+  student.value.address=input6.value;
+  
+  console.log('AfSno', student.value);
+
+  const res = await UpdateStudent(student.value);
+  console.log(res);
+  window.location.reload();
+  
+}
+
 // 从 sessionStorage 获取管理员数据，并调用 API
 const loadManageData = async () => {
   const storedObjectString = sessionStorage.getItem('managerData');
@@ -133,8 +221,14 @@ loadManageData(); // 立即加载数据
     right: 20px;
   }
 
-  .layout-container-demo .searchbar {
+  .layout-container-demo .searchbar2 {
     margin-right: 800px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+  .layout-container-demo .searchbar {
     display: inline-flex;
     align-items: center;
     justify-content: center;
