@@ -1,31 +1,26 @@
 <template>
-    <el-container class="layout-container-demo" style="height: 500px">
+    <el-container class="layout-container-demo" style="height: 100%">
         <el-header style="text-align: right; font-size: 12px">
-            <div class="searchbar">
-                <span>搜索学生</span>
-                <el-input
-                v-model="input0"
-                style="width: 240px"
-                placeholder="搜索学生"
-                :prefix-icon="Search"
-                />
-                <button @click="goToTeacherCourse">返回</button>
-                <button @click="handleAdd">添加</button>
-            </div>
           <div class="toolbar">
-            <el-dropdown>
-              <el-icon style="margin-right: 8px; margin-top: 1px">
-                <setting />
-              </el-icon>
-              <template #dropdown>
-                <el-dropdown-menu>
-                  <el-dropdown-item>View</el-dropdown-item>
-                  <el-dropdown-item>Add</el-dropdown-item>
-                  <el-dropdown-item>Delete</el-dropdown-item>
-                </el-dropdown-menu>
-              </template>
-            </el-dropdown>
-            <span>{{ teacherData ? teacherData.name : 'Default Name' }}</span>
+            <div class="mt-4" style="margin-right: 1100px;">
+                <el-input
+                  v-model="input0"
+                  style="max-width: 320px"
+                  placeholder="搜索学生"
+                  class="input-with-select"
+                >
+                <template #prepend>
+                  <el-button :icon="Search" @click="goToTeacherCourse">
+                    返回
+                  </el-button>
+                </template>
+                <template #append>
+                  <el-button :icon="Search" @click="handleAdd">
+                    添加
+                  </el-button>
+                </template>
+              </el-input>
+            </div>  
           </div>
         </el-header>
         <el-main>
@@ -237,7 +232,7 @@ const goToTeacherCourse = () => {
 /* 列表长度end */
 .layout-container-demo .el-header {
   position: relative;
-  background-color: var(--el-color-primary-light-7);
+  background-color: rgba(#FFFFFF);
   color: var(--el-text-color-primary);
 }
 
