@@ -45,12 +45,12 @@ public class MangeController {
     }
     @PostMapping(value = "/searchStudent")
     @ResponseBody
-    public List<Student> searchStudentByName(@RequestBody String name){
-        return studentService.searchStudentByName(name);
+    public List<Student> searchStudentByName(@RequestBody Student student){
+        return studentService.searchStudentByName(student.getName());
     }
     @PostMapping(value = "/searchTeacher")
     @ResponseBody
-    public List<Teacher> searchTeacherByName(@RequestBody String name){
-        return teacherService.searchTeacherByName(name);
+    public List<Teacher> searchTeacherByName(@RequestBody Student student){
+        return teacherService.searchTeacherByName(student.getName());
     }
 }

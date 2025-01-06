@@ -23,4 +23,6 @@ public interface StudentMapper {
     public List<Student> findAllStudent();
     @Select("select * from student where name like CONCAT('%', #{name}, '%') ")
     public List<Student> searchStudentByName(String name);
+    @Select("SELECT student.*, sc.sscore FROM student JOIN sc ON sc.sno=student.sno JOIN course ON sc.cno=course.cno WHERE course.cname LIKE CONCAT('%', #{name}, '%') and sc.sno=#{sno} ")
+    public List<StudentScoreInCourse> searchStudentScore(Student student);
 }
