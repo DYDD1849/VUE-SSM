@@ -19,4 +19,6 @@ public interface TeacherMapper {
     public int altTeacher(Teacher teacher);
     @Select("select * from teacher")
     public List<Teacher> findAllTeacher();
+    @Select("select * from teacher where name like CONCAT('%', #{name}, '%') ")
+    public List<Teacher> searchTeacherByName(String name);
 }
