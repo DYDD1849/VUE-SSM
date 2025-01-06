@@ -1,9 +1,8 @@
 package com.back_ssm.controller;
 
-import com.back_ssm.pojo.Course;
-import com.back_ssm.pojo.Score;
-import com.back_ssm.pojo.Student;
-import com.back_ssm.pojo.StudentScoreInCourse;
+import com.back_ssm.pojo.*;
+import com.back_ssm.pojo.combination.CnameSno;
+import com.back_ssm.pojo.combination.CnoSname;
 import com.back_ssm.service.ScoreService;
 import com.back_ssm.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +25,18 @@ public class ScoreController {
         return studentService.findStudentScoreByCno(course.getCno());
     }
 
+//    输入学号和课程名，输出学生信息和学生成绩。
     @PostMapping(value = "/searchStudentScore")
     @ResponseBody
-    public List<StudentScoreInCourse> getStudentScore(@RequestBody Student student){
-        return studentService.searchStudentScore(student);
+    public List<SnoCourse> getStudentScoreBySnoCname(@RequestBody CnameSno cnameSno){
+        return studentService.searchStudentScoreBySnoCname(cnameSno);
+    }
+
+    //    输入课程号和学生名，输出学生信息和学生成绩
+    @PostMapping(value = "/searchStudentScoreByCnoSname")
+    @ResponseBody
+    public List<StudentScoreInCourse> getStudentScoreByCnoSname(@RequestBody CnoSname cnoSname){
+        return studentService.searchStudentScoreByCnoSname(cnoSname);
     }
 
 
