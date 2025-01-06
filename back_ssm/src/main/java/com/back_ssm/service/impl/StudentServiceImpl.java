@@ -1,6 +1,7 @@
 package com.back_ssm.service.impl;
 
 import com.back_ssm.mapper.StudentMapper;
+import com.back_ssm.pojo.CnoSname;
 import com.back_ssm.pojo.Student;
 import com.back_ssm.pojo.StudentScoreInCourse;
 import com.back_ssm.service.StudentService;
@@ -33,8 +34,13 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<StudentScoreInCourse> searchStudentScore(Student student) {
-        return studentMapper.searchStudentScore(student);
+    public List<StudentScoreInCourse> searchStudentScoreBySnoCname(Student student) {
+        return studentMapper.searchStudentScoreBySnoCname(student);
+    }
+
+    @Override
+    public List<StudentScoreInCourse> searchStudentScoreByCnoSname(CnoSname cnoSname) {
+        return studentMapper.searchStudentScoreByCnoSname(cnoSname);
     }
 
     @Override
