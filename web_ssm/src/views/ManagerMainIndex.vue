@@ -1,31 +1,6 @@
 <template>
-  <el-container class="layout-container-demo" style="height: 500px">
-    <el-aside width="200px">
-      <el-scrollbar>
-        <el-menu :default-openeds="['1']">
-          <el-sub-menu index="1">
-            <template #title>
-              <el-icon><message /></el-icon>信息管理
-            </template>
-            <el-menu-item-group>
-              <el-menu-item index="1-1" @click="goToStudentManage">学生信息</el-menu-item>
-              <el-menu-item index="1-2" @click="goToTeacherManage">教师信息</el-menu-item>
-            </el-menu-item-group>
-          </el-sub-menu>
-          <el-sub-menu index="2">
-            <template #title>
-              <el-icon><icon-menu /></el-icon>成绩管理
-            </template>
-            <el-menu-item-group>
-              <el-menu-item index="2-1" @click="goToSCrootManage">学生成绩</el-menu-item>
-            </el-menu-item-group>
-          </el-sub-menu>
-        </el-menu>
-      </el-scrollbar>
-    </el-aside>
-
-    <el-container>
-      <el-header style="text-align: right; font-size: 12px">
+  <el-container class="layout-container-demo">
+    <el-header style="text-align: right; font-size: 12px">
         <button @click="quitAction">退出</button>
         <div class="toolbar">
           <el-dropdown>
@@ -42,13 +17,36 @@
           </el-dropdown>
           <span>{{ managerData ? managerData.account : 'Default Name' }}</span>
         </div>
-      </el-header>
+    </el-header>
+      <el-container>
+        <el-aside width="200px">
+          <el-scrollbar>
+            <el-menu :default-openeds="['1']">
+              <el-sub-menu index="1">
+                <template #title>
+                  <el-icon><message /></el-icon>信息管理
+                </template>
+                <el-menu-item-group>
+                  <el-menu-item index="1-1" @click="goToStudentManage">学生信息</el-menu-item>
+                  <el-menu-item index="1-2" @click="goToTeacherManage">教师信息</el-menu-item>
+                </el-menu-item-group>
+              </el-sub-menu>
+              <el-sub-menu index="2">
+                <template #title>
+                  <el-icon><icon-menu /></el-icon>成绩管理
+                </template>
+                <el-menu-item-group>
+                  <el-menu-item index="2-1" @click="goToSCrootManage">学生成绩</el-menu-item>
+                </el-menu-item-group>
+              </el-sub-menu>
+            </el-menu>
+          </el-scrollbar>
+        </el-aside>
 
-      <el-main>
-        
-          <router-view />
-        
-      </el-main>
+        <el-main>
+        <router-view />
+        </el-main>
+
     </el-container>
   </el-container>
 </template>

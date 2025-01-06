@@ -66,13 +66,13 @@ const quitAction = async()=>{
   router.push("/");
 }
  
-// 管理链接点击事件处理函数
+// 跳转聊天函数
 const handleManage = (row) => {
-  console.log('Managing tea:', row.teacher.tno);
+  console.log('Managing tea:', row.teacher.account);
   // 这里可以添加跳转到管理页面的逻辑，例如使用 vue-router 导航到一个管理详情页面
   // router.push({ name: 'courseManage', params: { courseId: row.cno } });
   
-   router.push({name: 'GoChat',params:{id:row.teacher.tno}});
+   router.push({name: 'GoChat',params:{id:row.teacher.account}});
 };
 
 // 尝试从 sessionStorage 获取学生数据，并调用 API
