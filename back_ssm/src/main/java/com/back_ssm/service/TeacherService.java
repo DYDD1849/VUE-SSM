@@ -11,4 +11,5 @@ public interface TeacherService {
     public Teacher findTeacherByAccount(String account);
     public int altTeacher(Teacher teacher);
     public List<Teacher> findAllTeacher();
+    public List<Teacher> searchTeacherByName(String name);
 }

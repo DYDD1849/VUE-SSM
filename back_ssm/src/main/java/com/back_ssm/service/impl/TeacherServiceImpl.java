@@ -36,4 +36,9 @@ public class TeacherServiceImpl implements TeacherService {
     public List<Teacher> findAllTeacher() {
         return teacherMapper.findAllTeacher();
     }
+
+    @Override
+    public List<Teacher> searchTeacherByName(String name) {
+        return teacherMapper.searchTeacherByName(name);
+    }
 }
