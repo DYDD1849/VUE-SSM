@@ -21,4 +21,6 @@ public interface StudentMapper {
     public int altStudent(Student student);
     @Select("select * from student")
     public List<Student> findAllStudent();
+    @Select("select * from student where name like CONCAT('%', #{name}, '%') ")
+    public List<Student> searchStudentByName(String name);
 }

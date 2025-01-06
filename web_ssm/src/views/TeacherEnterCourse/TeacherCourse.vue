@@ -2,14 +2,7 @@
     <el-container class="layout-container-demo" style="height:100%">
         <el-header style="text-align: right; font-size: 12px">
           <div class="toolbar">
-            <div class="mt-4" style="margin-right: 1200px;">
-              <el-input
-                    v-model="input0"
-                    style="max-width: 320px"
-                    placeholder="搜索我教的课程"
-                    class="input-with-select"
-                  >
-              </el-input>
+            <div class="mt-4" style="margin-right: 10%;">
             </div>
           </div>
         </el-header>

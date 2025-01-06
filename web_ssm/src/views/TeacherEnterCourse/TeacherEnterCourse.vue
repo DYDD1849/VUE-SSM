@@ -2,7 +2,7 @@
     <el-container class="layout-container-demo" style="height: 100%">
         <el-header style="text-align: right; font-size: 12px">
           <div class="toolbar">
-            <div class="mt-4" style="margin-right: 1100px;">
+            <div class="mt-4" style="margin-right: 10%;">
                 <el-input
                   v-model="input0"
                   style="max-width: 320px"

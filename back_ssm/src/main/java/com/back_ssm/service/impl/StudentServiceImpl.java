@@ -41,4 +41,9 @@ public class StudentServiceImpl implements StudentService {
     public List<Student> findAllStudent() {
         return studentMapper.findAllStudent();
     }
+
+    @Override
+    public List<Student> searchStudentByName(String name) {
+        return studentMapper.searchStudentByName(name);
+    }
 }
