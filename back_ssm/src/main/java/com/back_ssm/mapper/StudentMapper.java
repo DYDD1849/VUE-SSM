@@ -1,6 +1,8 @@
 package com.back_ssm.mapper;
 
-import com.back_ssm.pojo.CnoSname;
+import com.back_ssm.pojo.SnoCourse;
+import com.back_ssm.pojo.combination.CnameSno;
+import com.back_ssm.pojo.combination.CnoSname;
 import com.back_ssm.pojo.Student;
 import com.back_ssm.pojo.StudentScoreInCourse;
 import org.apache.ibatis.annotations.Insert;
@@ -24,8 +26,7 @@ public interface StudentMapper {
     public List<Student> findAllStudent();
     @Select("select * from student where name like CONCAT('%', #{name}, '%') ")
     public List<Student> searchStudentByName(String name);
-    @Select("SELECT student.*, sc.sscore FROM student JOIN sc ON sc.sno=student.sno JOIN course ON sc.cno=course.cno WHERE course.cname LIKE CONCAT('%', #{name}, '%') and sc.sno=#{sno} ")
-    public List<StudentScoreInCourse> searchStudentScoreBySnoCname(Student student);
     @Select("SELECT student.*, sc.sscore FROM student JOIN sc ON sc.sno=student.sno JOIN course ON sc.cno=course.cno WHERE student.name LIKE CONCAT('%', #{name}, '%') and course.cno=#{cno} ")
     public List<StudentScoreInCourse> searchStudentScoreByCnoSname(CnoSname cnoSname);
+    public List<SnoCourse> searchCourseScoreByCnameSno(CnameSno cnameSno);
 }

@@ -1,4 +1,4 @@
-package com.back_ssm.pojo;
+package com.back_ssm.pojo.combination;
 
 public class CnoSname {
     private String cno;
