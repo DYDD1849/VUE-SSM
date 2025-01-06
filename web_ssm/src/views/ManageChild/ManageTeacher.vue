@@ -9,6 +9,11 @@
                     placeholder="搜索教师"
                     class="input-with-select"
                   >
+                  <template #append>
+                  <el-button :icon="Search" @click="SearchStudent">
+                    搜索
+                  </el-button>
+                  </template>
                   </el-input>
             </div>
           </div>

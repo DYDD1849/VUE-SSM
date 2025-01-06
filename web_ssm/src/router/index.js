@@ -6,6 +6,7 @@ import TeacherMainIndex from "@/views/TeacherMainIndex.vue";
 import ManagerMainIndex from "@/views/ManagerMainIndex.vue";
 import LogIn from "@/views/LogIn.vue";
 import ChatTest from "@/views/chatTest.vue";
+import ChatRoom from "@/views/ChatRoom/ChatRoom.vue";
 
 const routes = [
     {
@@ -27,6 +28,11 @@ const routes = [
       path:"/StudentMain",
       name:"studentMain",
       component:StudentMainIndex,
+    },
+    {
+      path:"/GoChatRoom",
+      name:"ChatRoom",
+      component:ChatRoom,
     },
     {
       path:"/GoChat/:id",

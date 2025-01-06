@@ -2,6 +2,9 @@
   <el-container class="layout-container-demo" style="height: 100%">
       <el-header style="text-align: right; font-size: 12px">
         <div class="toolbar">
+            <div class="mb-4" style="margin-right: 50px;">
+              <el-button type="primary" plain @click="gotoChat">邮箱</el-button>
+            </div>
             <el-text class="mx-1" type="primary" size="large" style="margin-right: 50px;">
               {{ teacherData ? teacherData.name : 'Default Name' }}
             </el-text>
@@ -19,6 +22,10 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 const router = useRouter();
+//邮箱
+const gotoChat = async()=> {
+  router.push("/GoChatRoom");
+}
 //退出按钮
 const quitAction = async()=>{
   sessionStorage.clear();
