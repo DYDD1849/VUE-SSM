@@ -1,5 +1,5 @@
 <template>
-    <el-container class="layout-container-demo" style="height: 500px">
+    <el-container>
         <el-header style="text-align: right; font-size: 12px">
           <div class="searchbar2">
                 <span>搜索教师</span>
@@ -23,7 +23,6 @@
                 </el-dropdown-menu>
               </template>
             </el-dropdown>
-            <span>{{ managerData ? managerData.account : 'Default Name' }}</span>
           </div>
         </el-header>
         <el-main>
@@ -183,6 +182,7 @@ loadManageData(); // 立即加载数据
   
   .layout-container-demo .el-main {
   padding: 0;
+  
   }
   
   .layout-container-demo .toolbar {

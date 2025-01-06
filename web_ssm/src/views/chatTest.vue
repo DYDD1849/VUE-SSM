@@ -48,7 +48,7 @@
               class="input-with-select"
             >
               <template #prepend>
-                <el-button>
+                <el-button @click="goback">
                     返回
                 </el-button>
               </template>
@@ -64,12 +64,17 @@
     </div>
   </template>
   <script>
+  import { useRouter } from 'vue-router';
+  import { ref} from 'vue';
   export default {
-    data() {
-      return {
-        Medata:(JSON.parse(sessionStorage.getItem('studentData')).sno!=null)?JSON.parse(sessionStorage.getItem('studentData')):JSON.parse(sessionStorage.getItem('teacherData'))
-        ,
-        messages: [
+    setup() {
+    const router = useRouter();
+    const textareaMsg = ref("");
+    const Medata=ref((JSON.parse(sessionStorage.getItem('studentData'))!=null)?JSON.parse(sessionStorage.getItem('studentData')):JSON.parse(sessionStorage.getItem('teacherData')))
+        
+    const role=ref(JSON.parse(sessionStorage.getItem('studentData'))!=null?1:2)
+        
+    const messages= ref([
           { sender: "me", content: "你好！" },
           { sender: "other", content: "你好啊！" },
           { sender: "other", content: "请问有什么我可以帮助你的吗？" },
@@ -90,10 +95,66 @@
           { sender: "other", content: "不客气，祝您用餐愉快！" },
           { sender: "me", content: "再见！" },
           { sender: "other", content: "再见！" },
-        ],
-        textareaMsg:""
-      };
-    },
+        ])
+
+    const goback =  () => {
+    if (role.value==1)
+    router.push("/StudentMain");
+    else
+    router.push("/TeacherMain");
+     // 返回
+    };
+ 
+    return {
+      Medata,
+      role,
+      messages,
+      textareaMsg,
+      goback,
+      // 如果需要，可以在这里返回其他响应式状态或函数
+    };
+  },
+    // data() {
+    //   return {
+    //     Medata:(JSON.parse(sessionStorage.getItem('studentData')).sno!=null)?JSON.parse(sessionStorage.getItem('studentData')):JSON.parse(sessionStorage.getItem('teacherData'))
+    //     ,
+    //     role:(JSON.parse(sessionStorage.getItem('studentData')).sno!=null)?1:2
+    //     ,
+    //     messages: [
+    //       { sender: "me", content: "你好！" },
+    //       { sender: "other", content: "你好啊！" },
+    //       { sender: "other", content: "请问有什么我可以帮助你的吗？" },
+    //       { sender: "me", content: "我正在寻找一家好的餐厅。" },
+    //       { sender: "other", content: "你在哪个城市？" },
+    //       { sender: "me", content: "我在北京。" },
+    //       {
+    //         sender: "other",
+    //         content: "好的，我可以为您推荐一些北京的餐厅。您需要什么类型的餐厅？",
+    //       },
+    //       { sender: "me", content: "我想要吃火锅。" },
+    //       {
+    //         sender: "other",
+    //         content:
+    //           "好的，以下是我为您推荐的北京火锅餐厅列表：[餐厅1，餐厅2，餐厅3]。您需要我帮您预约吗？",
+    //       },
+    //       { sender: "me", content: "不需要，我会自己预约。谢谢您的帮助！" },
+    //       { sender: "other", content: "不客气，祝您用餐愉快！" },
+    //       { sender: "me", content: "再见！" },
+    //       { sender: "other", content: "再见！" },
+    //     ],
+    //     textareaMsg:""
+    //   };
+    // },
+    // methods:{
+    //   Goback:function(){
+    //     console.log(this.role)
+    //     const router = useRouter();
+    //     if (this.role==1)
+    //     router.push("/StudentMain");
+    //     else
+    //     router.push("/TeacherMain");
+    //   }
+    // }
   };
   </script>
   <style>

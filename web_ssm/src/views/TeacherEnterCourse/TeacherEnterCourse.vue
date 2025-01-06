@@ -33,6 +33,11 @@
             <el-table :data="items">
               <el-table-column prop="sno" label="学号" width="120" />
               <el-table-column prop="sscore" label="成绩" width="120"/>
+              <el-table-column label="学生名" width="120">
+              <template #default="scope">
+              <el-link href="#" @click="handleManage(scope.row)">{{ scope.row.name }}</el-link>
+            </template>
+            </el-table-column>
               <el-table-column width="120">
               <template #default="scope">
                 <el-link href="#" @click="handleAlter(scope.row)">修改</el-link>
@@ -135,6 +140,15 @@
   const dialogVisibleAlter = ref(false)
   const dialogVisibleDel = ref(false)
   const dialogVisibleAdd = ref(false)
+
+// 跳转聊天函数
+const handleManage = (row) => {
+  console.log('Managing tea:', row.account);
+
+  
+   router.push({name: 'GoChat',params:{id:row.account}});
+};
+
 // 修改 删除点击事件处理函数
 const handleAlter = (row) => {
   dialogVisibleAlter.value=true;

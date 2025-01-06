@@ -1,5 +1,5 @@
 <template>
-    <el-container class="layout-container-demo" style="height: 500px">
+    <el-container>
         <el-header style="text-align: right; font-size: 12px">
           <div class="searchbar">
                   <span>搜索课程</span>
@@ -10,24 +10,8 @@
                   :prefix-icon="Search"
                   />
               </div>
-          <div class="toolbar">
-            <el-dropdown>
-              <el-icon style="margin-right: 8px; margin-top: 1px">
-                <setting />
-              </el-icon>
-              <template #dropdown>
-                <el-dropdown-menu>
-                  <el-dropdown-item>View</el-dropdown-item>
-                  <el-dropdown-item>Add</el-dropdown-item>
-                  <el-dropdown-item>Delete</el-dropdown-item>
-                </el-dropdown-menu>
-              </template>
-            </el-dropdown>
-            <span>{{ managerData ? managerData.account : 'Default Name' }}</span>
-          </div>
         </el-header>
         <el-main>
-          我教的课
           <el-scrollbar>
             <el-table :data="items">
               <el-table-column prop="cname" label="课程名" width="120" />
@@ -113,7 +97,7 @@
   }
   
   .layout-container-demo .searchbar {
-      margin-right: 1000px;
+      margin-right: 900px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
