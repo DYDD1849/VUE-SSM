@@ -7,4 +7,5 @@ import java.util.List;
 public interface MessageService {
     public List<Message> findMessageBySenderReceiver(Message message);
     public int addMessage(Message message);
+    public List<Message> findIsReadMessageByReceiver(Message message);
 }
