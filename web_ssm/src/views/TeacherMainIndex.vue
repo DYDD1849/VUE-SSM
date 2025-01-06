@@ -1,21 +1,13 @@
 <template>
-  <el-container class="layout-container-demo" style="height: 500px">
+  <el-container class="layout-container-demo" style="height: 100%">
       <el-header style="text-align: right; font-size: 12px">
-        <button @click="quitAction">退出</button>
         <div class="toolbar">
-          <el-dropdown>
-            <el-icon style="margin-right: 8px; margin-top: 1px">
-              <setting />
-            </el-icon>
-            <template #dropdown>
-              <el-dropdown-menu>
-                <el-dropdown-item>View</el-dropdown-item>
-                <el-dropdown-item>Add</el-dropdown-item>
-                <el-dropdown-item>Delete</el-dropdown-item>
-              </el-dropdown-menu>
-            </template>
-          </el-dropdown>
-          <span>{{ teacherData ? teacherData.name : 'Default Name' }}</span>
+            <el-text class="mx-1" type="primary" size="large" style="margin-right: 50px;">
+              {{ teacherData ? teacherData.name : 'Default Name' }}
+            </el-text>
+            <div class="mb-4">
+              <el-button type="primary" plain @click="quitAction">退出</el-button>
+            </div>
         </div>
       </el-header>
       <el-main>
@@ -51,10 +43,6 @@ loadTeacherData(); // 立即加载数据
 position: relative;
 background-color: var(--el-color-primary-light-7);
 color: var(--el-text-color-primary);
-}
-
-.layout-container-demo .el-main {
-padding: 0;
 }
 
 .layout-container-demo .toolbar {

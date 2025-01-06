@@ -1,33 +1,19 @@
 <template>
-    <el-container class="layout-container-demo" style="height: 500px">
+    <el-container class="layout-container-demo" style="height:100%">
         <el-header style="text-align: right; font-size: 12px">
-          <div class="searchbar">
-                  <span>搜索课程</span>
-                  <el-input
-                  v-model="input2"
-                  style="width: 240px"
-                  placeholder="搜索我教的课程"
-                  :prefix-icon="Search"
-                  />
-              </div>
           <div class="toolbar">
-            <el-dropdown>
-              <el-icon style="margin-right: 8px; margin-top: 1px">
-                <setting />
-              </el-icon>
-              <template #dropdown>
-                <el-dropdown-menu>
-                  <el-dropdown-item>View</el-dropdown-item>
-                  <el-dropdown-item>Add</el-dropdown-item>
-                  <el-dropdown-item>Delete</el-dropdown-item>
-                </el-dropdown-menu>
-              </template>
-            </el-dropdown>
-            <span>{{ teacherData ? teacherData.name : 'Default Name' }}</span>
+            <div class="mt-4" style="margin-right: 1200px;">
+              <el-input
+                    v-model="input0"
+                    style="max-width: 320px"
+                    placeholder="搜索我教的课程"
+                    class="input-with-select"
+                  >
+              </el-input>
+            </div>
           </div>
         </el-header>
         <el-main>
-          我教的课
           <el-scrollbar>
             <el-table :data="items">
               <el-table-column prop="cname" label="课程名" width="120" />
@@ -96,7 +82,7 @@
   /* 列表长度end */
   .layout-container-demo .el-header {
   position: relative;
-  background-color: var(--el-color-primary-light-7);
+  background-color: rgba(#FFFFFF);
   color: var(--el-text-color-primary);
   }
   
