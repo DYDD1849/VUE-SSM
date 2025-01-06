@@ -9,6 +9,8 @@ import java.util.List;
 public interface MessageMapper {
     @Select("select * from chat where sender=#{sender} and receiver=#{receiver}")
     public List<Message> findMessageBySenderReceiver(Message message);
+    @Select("select * from chat where sender=#{receiver} and receiver=#{sender}")
+    public List<Message> findMessageBySenderReceiver2(Message message);
     @Insert("insert into chat values(#{sender},#{receiver},#{msg},#{date},#{isread})")
     public int addMessage(Message message);
 }

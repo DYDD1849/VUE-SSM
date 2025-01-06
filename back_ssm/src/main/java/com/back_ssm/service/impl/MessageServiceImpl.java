@@ -13,11 +13,14 @@ public class MessageServiceImpl implements MessageService {
     MessageMapper messageMapper;
     @Override
     public List<Message> findMessageBySenderReceiver(Message message) {
-        return messageMapper.findMessageBySenderReceiver(message);
+        List<Message> merge= messageMapper.findMessageBySenderReceiver(message);
+        merge.addAll(messageMapper.findMessageBySenderReceiver2(message));
+        return merge;
     }
 
     @Override
     public int addMessage(Message message) {
+        message.setIsread("false");
         return messageMapper.addMessage(message);
     }
 }
