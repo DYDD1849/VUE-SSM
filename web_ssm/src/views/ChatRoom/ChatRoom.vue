@@ -29,7 +29,8 @@ export default{
     },
     methods:{
         gotoChat:function(){
-            this.$router.push("GoChat",{id:this.id})
+            console.log("ss",this.id)
+            this.$router.push({name:"ChatRoomToChat",params:{id:this.id}})
         }
     }
     
@@ -51,6 +52,6 @@ export default{
     background-color: #EBEEF5;
 }
 .container{
-    height: 600px;
+    height: 650px;
 }
 </style>

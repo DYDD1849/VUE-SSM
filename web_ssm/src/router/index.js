@@ -28,17 +28,26 @@ const routes = [
       path:"/StudentMain",
       name:"studentMain",
       component:StudentMainIndex,
+      children:[
+        {
+          path:"",
+          component: () => import("../views/StudentChild/StudentScore.vue"),
+        },
+        {
+          path:"/GoChatRoom",
+          name:"ChatRoomS",
+          component:ChatRoom,
+          children:[
+            {
+            path:"/GoChat/:id",
+            name:"ChatRoomToChat",
+            component:ChatTest,
+            }
+          ]
+        },
+      ]
     },
-    {
-      path:"/GoChatRoom",
-      name:"ChatRoom",
-      component:ChatRoom,
-    },
-    {
-      path:"/GoChat/:id",
-      name:"GoChat",
-      component:ChatTest,
-    },
+
     {
       path:"/TeacherMain",
       name:"teacherMain",
@@ -53,7 +62,19 @@ const routes = [
           path: "/TeacherEnterCourse/:cno",
           name:'TeacherEnterCourse',
           component: () => import("../views/TeacherEnterCourse/TeacherEnterCourse.vue"),
-        }
+        },
+        {
+          path:"/GoChatRoom",
+          name:"ChatRoomT",
+          component:ChatRoom,
+          children:[
+            {
+            path:"/GoChat/:id",
+            name:"ChatRoomToChat",
+            component:ChatTest,
+            }
+          ]
+        },
       ]
     },
     {

@@ -24,7 +24,7 @@ import { useRouter } from 'vue-router';
 const router = useRouter();
 //邮箱
 const gotoChat = async()=> {
-  router.push("/GoChatRoom");
+  router.push({name:"ChatRoomT"});
 }
 //退出按钮
 const quitAction = async()=>{
