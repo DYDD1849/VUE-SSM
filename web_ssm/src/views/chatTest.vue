@@ -39,6 +39,7 @@
       <el-container>
         <el-footer >
         <div class="mt-4">
+
             <el-input
               v-model="textareaMsg"
               size="large"
@@ -46,6 +47,11 @@
               placeholder="Please input"
               class="input-with-select"
             >
+              <template #prepend>
+                <el-button>
+                    返回
+                </el-button>
+              </template>
               <template #append>
                 <el-button>
                     发送
@@ -61,6 +67,8 @@
   export default {
     data() {
       return {
+        Medata:(JSON.parse(sessionStorage.getItem('studentData')).sno!=null)?JSON.parse(sessionStorage.getItem('studentData')):JSON.parse(sessionStorage.getItem('teacherData'))
+        ,
         messages: [
           { sender: "me", content: "你好！" },
           { sender: "other", content: "你好啊！" },
