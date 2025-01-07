@@ -23,4 +23,8 @@ public interface MessageMapper {
     public List<MessageName> findSenderByStudent(Message message);
     @Select("SELECT student.account AS sender, student.name AS senderName FROM chat JOIN student ON student.account = chat.sender WHERE chat.receiver = #{receiver} GROUP BY student.account, student.name")
     public List<MessageName> findSenderByTeacher(Message message);
+    @Select("SELECT teacher.account AS sender, teacher.name AS senderName FROM chat JOIN teacher ON teacher.account = chat.receiver WHERE chat.sender = #{receiver} GROUP BY teacher.account, teacher.name")
+    public List<MessageName> findReceiverByStudent(Message message);
+    @Select("SELECT student.account AS sender, student.name AS senderName FROM chat JOIN student ON student.account = chat.receiver WHERE chat.sender = #{receiver} GROUP BY student.account, student.name")
+    public List<MessageName> findReceiverByTeacher(Message message);
 }
