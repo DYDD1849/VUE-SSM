@@ -9,7 +9,8 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.List;
+import java.util.*;
+
 @Service
 public class MessageServiceImpl implements MessageService {
     @Autowired
@@ -19,6 +20,7 @@ public class MessageServiceImpl implements MessageService {
         List<Message> merge= messageMapper.findMessageBySenderReceiver(message);
         messageMapper.UpdateMessageIsReadByReceiver(message);
         merge.addAll(messageMapper.findMessageBySenderReceiver2(message));
+        Collections.sort(merge, Comparator.comparing(Message::getDate));
         return merge;
     }
 
@@ -45,7 +47,16 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public List<MessageName> findSenderByStudentTeacher(Message message) {
         List<MessageName> a=messageMapper.findSenderByStudent(message);
+        List<MessageName> rs=new ArrayList<>();
+        Set<String> setAccount=new HashSet<String>();
         a.addAll(messageMapper.findSenderByTeacher(message));
-        return a;
+        a.addAll(messageMapper.findReceiverByStudent(message));
+        a.addAll(messageMapper.findReceiverByTeacher(message));
+        for(MessageName messageName:a){
+            if (!setAccount.contains(messageName.getSender()))
+                rs.add(messageName);
+            setAccount.add(messageName.getSender());
+        }
+        return rs;
     }
 }
