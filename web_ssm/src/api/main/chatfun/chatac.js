@@ -10,6 +10,16 @@ export function MeGetMessage(query){
     })
 }
 
+export function MeFindNoread(query){
+    
+    return request({
+        //发送请求
+        url:'/findNoReadMessage',
+        method:'post',
+        data:query
+    })
+}
+
 export function MeSendMessage(query){
     
     return request({

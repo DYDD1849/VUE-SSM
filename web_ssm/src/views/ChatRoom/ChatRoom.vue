@@ -35,8 +35,8 @@ export default{
         gotoChat:function(item){
             const role=ref(JSON.parse(sessionStorage.getItem('studentData'))!=null?1:2)
             this.id=item.sender
-            console.log("id是",item.senderName)
-            console.log("ss",this.id)
+            console.log("名字是",item.senderName)
+            console.log("id是",this.id)
             if (role.value==1)
             this.$router.push({name:"StudentToChat",params:{id:this.id,name:item.senderName}})
             else
