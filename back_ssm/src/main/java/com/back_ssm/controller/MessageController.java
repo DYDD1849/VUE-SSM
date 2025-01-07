@@ -29,7 +29,7 @@ public class MessageController {
     @PostMapping(value = "/findNoReadMessage")
     @ResponseBody
     public String findIsReadMessageByReceiver(@RequestBody Message message){
-        if(messageService.findIsReadMessageByReceiver(message)==null)return "没有未读信息1";
+        if(messageService.findIsReadMessageByReceiver(message).isEmpty())return "没有未读信息1";
         return "有未读信息2";
     }
 
