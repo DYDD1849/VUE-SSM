@@ -29,6 +29,7 @@
             <el-table :data="items">
               <el-table-column prop="sno" label="学号" width="120" />
               <el-table-column prop="sscore" label="成绩" width="120"/>
+              <el-table-column prop="name" label="学生名" width="120"/>
               <el-table-column width="120">
               <template #default="scope">
                 <el-link href="#" @click="handleAlter(scope.row)">修改</el-link>
@@ -119,7 +120,7 @@
 <script setup>
   import { ref } from 'vue';
   import { useRouter,useRoute } from 'vue-router';
-  import { managerEnterCourse,managerAltScore,managerDelScore,managerAddScore } from '@/api/main/manager/managerSC.js';
+  import { managerEnterCourse,managerAltScore,managerDelScore,managerAddScore,managerSearchScore } from '@/api/main/manager/managerSC.js';
 //搜索框  
   const input0=ref();
 //管理员信息传递
@@ -151,6 +152,16 @@ const handleAdd = () => {
   dialogVisibleAdd.value=true;
   //router.push({name: 'routeName',params:{ cno:row.cno}});
 };
+
+//搜索功能
+const SearchStudent =async()=>{
+  console.log("input",input0.value)
+  const cnoSname={name:input0.value,cno:storeCno.value}
+  const res = await managerSearchScore(cnoSname);
+  items.value=res.data;
+  console.log("name",res);
+}
+
 //修改内容处理
 const input1 = ref();
 const input2 = ref();

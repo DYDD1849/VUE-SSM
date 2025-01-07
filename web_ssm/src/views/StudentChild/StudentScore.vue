@@ -50,8 +50,8 @@
   
   const SearchCourse =async()=>{
     console.log("input",input0.value)
-    const student={name:input0.value,sno:studentData.value.sno}
-    const res = await searchStudentScore(student);
+    const cnameSno={cname:input0.value,sno:studentData.value.sno}
+    const res = await searchStudentScore(cnameSno);
     items.value=res.data;
     console.log("name",res);
   }
