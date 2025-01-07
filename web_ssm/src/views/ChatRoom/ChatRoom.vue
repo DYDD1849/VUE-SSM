@@ -4,7 +4,7 @@
             <el-aside class="aside" width="200px">
                 <el-menu>
                 <el-menu-item index="4" class="contactb1" :key="item.account" v-for="item in contact" @click="gotoChat(item)">
-                    <template #title >{{ item.name }}</template>
+                    <template #title >{{ item.senderName }}</template>
                   </el-menu-item>   
                 </el-menu>
             </el-aside>
@@ -16,16 +16,13 @@
 </template>
 <script>
 import {ref} from 'vue'
-// import {MeGetMessage} from '@/api/main/chatfun/chatac.js'
+import {MeGetMessage} from '@/api/main/chatfun/chatac.js'
 export default{
     name:"ChatRoom",
     data(){
         return{
             // 这个数据存储sender发送者的名字，账号
             contact:[
-                {"name":"abc","account":123},
-                {"name":"afadf","account":122},
-                {"name":"hello","account":123323}
             ],
             id:1
         }
@@ -37,19 +34,22 @@ export default{
         // 点击之后跳转main页面，将上面数据的account传输到聊天页面。聊天页面通过sender和receiver来查询显示所有信息
         gotoChat:function(item){
             const role=ref(JSON.parse(sessionStorage.getItem('studentData'))!=null?1:2)
-            this.id=item.account
+            this.id=item.sender
+            console.log("id是",item.senderName)
             console.log("ss",this.id)
             if (role.value==1)
-            this.$router.push({name:"StudentToChat",params:{id:this.id}})
+            this.$router.push({name:"StudentToChat",params:{id:this.id,name:item.senderName}})
             else
-            this.$router.push({name:"TeacherToChat",params:{id:this.id}})
+            this.$router.push({name:"TeacherToChat",params:{id:this.id,name:item.senderName}})
         },
-        Getcontant:function(){
+        async Getcontant(){
             const Medata=ref((JSON.parse(sessionStorage.getItem('studentData'))!=null)?JSON.parse(sessionStorage.getItem('studentData')):JSON.parse(sessionStorage.getItem('teacherData')))
             const account=Medata.value.account
+            const message={ receiver:account }
             console.log("accont",account)
-            // const res = MeGetMessage(account)
-            // console.log(res)
+            const res = await MeGetMessage(message)
+            this.contact = res.data
+            console.log("返回是",this.contact)
         },
     }
     

@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 @Service
 public class MessageServiceImpl implements MessageService {
@@ -19,6 +21,7 @@ public class MessageServiceImpl implements MessageService {
         List<Message> merge= messageMapper.findMessageBySenderReceiver(message);
         messageMapper.UpdateMessageIsReadByReceiver(message);
         merge.addAll(messageMapper.findMessageBySenderReceiver2(message));
+        Collections.sort(merge, Comparator.comparing(Message::getDate));
         return merge;
     }
 

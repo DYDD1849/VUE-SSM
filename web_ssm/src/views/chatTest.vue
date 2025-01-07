@@ -2,7 +2,7 @@
     <div>
       <div
         :class="
-          message.sender === 'me' ? 'chat-message-me' : 'chat-message-other'
+          message.sender === Medata.account ? 'chat-message-me' : 'chat-message-other'
         "
         :style="{
           'padding-bottom': messages.length - 1 === index ? '2rem' : 'none',
@@ -14,7 +14,7 @@
         <!--          消息-->
         <div
           :class="
-            message.sender === 'me'
+            message.sender === Medata.account
               ? 'message-me-asWhole-right'
               : 'message-other-asWhole-right'
           "
@@ -22,16 +22,16 @@
           <!--            消息上面-->
           <div
             :class="
-              message.sender === 'me'
+              message.sender === Medata.account
                 ? 'message-me-asWhole-top'
                 : 'message-other-asWhole-top'
             "
           >
-            {{ (message.sender==Medata.account)?Medata.name:"other"}}
+            {{ (message.sender==Medata.account)?Medata.name:storeReName}}
           </div>
           <!--          消息内容-->
-          <div :class="message.sender === 'me' ? 'message-me' : 'message-other'">
-            {{ message.content }}
+          <div :class="message.sender === Medata.account ? 'message-me' : 'message-other'">
+            {{ message.msg }}
           </div>
         </div>
       </div>
@@ -65,7 +65,7 @@
   <script>
   import { useRouter,useRoute } from 'vue-router';
   import { ref} from 'vue';
-  import { MeSendMessage } from '@/api/main/chatfun/chatac.js'
+  import { MeSendMessage,LoadMessage } from '@/api/main/chatfun/chatac.js'
   export default {
     setup() {
     const router = useRouter();
@@ -74,28 +74,17 @@
     const role=ref(JSON.parse(sessionStorage.getItem('studentData'))!=null?1:2)
     var route = useRoute(); 
     var storeReceiver = route.params.id;
-    const messages= ref([
-          { sender: "123456", content: "你好！" },
-          { sender: "other", content: "你好啊！" },
-          { sender: "other", content: "请问有什么我可以帮助你的吗？" },
-          { sender: "123456", content: "我正在寻找一家好的餐厅。" },
-          { sender: "other", content: "你在哪个城市？" },
-          { sender: "me", content: "我在北京。" },
-          {
-            sender: "other",
-            content: "好的，我可以为您推荐一些北京的餐厅。您需要什么类型的餐厅？",
-          },
-          { sender: "me", content: "我想要吃火锅。" },
-          {
-            sender: "other",
-            content:
-              "好的，以下是我为您推荐的北京火锅餐厅列表：[餐厅1，餐厅2，餐厅3]。您需要我帮您预约吗？",
-          },
-          { sender: "me", content: "不需要，我会自己预约。谢谢您的帮助！" },
-          { sender: "other", content: "不客气，祝您用餐愉快！" },
-          { sender: "me", content: "再见！" },
-          { sender: "other", content: "再见！" },
-        ])
+    var storeReName = route.params.name;
+    const messages= ref([])
+
+    const loadMessage = async () => {
+      var message={sender:Medata.value.account,receiver:storeReceiver}
+      const res = await LoadMessage(message)
+      messages.value=res.data
+      console.log("加载信息",messages.value)
+      
+    }
+    loadMessage()
 
     const goback =  () => {
     if (role.value==1)
@@ -108,10 +97,12 @@
     const send = () => {
       console.log("m",textareaMsg.value)
       storeReceiver = route.params.id;
+      storeReName = route.params.name;
       console.log("sss",storeReceiver)
       var Message = { sender:Medata.value.account,receiver:storeReceiver,msg:textareaMsg.value}
       const res = MeSendMessage(Message)
       console.log("我发的信息",res)
+      messages.value.push(Message);
     }
  
     return {
@@ -119,6 +110,7 @@
       role,
       messages,
       textareaMsg,
+      storeReName,
       goback,
       send
       // 如果需要，可以在这里返回其他响应式状态或函数
