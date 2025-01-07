@@ -104,6 +104,7 @@ const router = useRouter();
 const input = async () => {
   try {
     var res
+    var res2 = await managerLogIn(user.value);
     if (user.value.role=='1'){
       res = await studentLogIn(user.value);
     }
@@ -119,18 +120,21 @@ const input = async () => {
     }
     console.log(res);
     if (Object.keys(res.data).length !== 0 ) {
-      if (user.value.role=='1'){
-        sessionStorage.setItem('studentData', JSON.stringify(res.data));
-        router.push('/StudentMain');
+      if (user.value.role==res2.data.role){
+        if (user.value.role=='1'){
+          sessionStorage.setItem('studentData', JSON.stringify(res.data));
+          router.push('/StudentMain');
+        }
+        else if(user.value.role=='2'){
+          sessionStorage.setItem('teacherData', JSON.stringify(res.data));
+          router.push('/TeacherMain');
+        }
+        else if(user.value.role=='3'){
+          sessionStorage.setItem('managerData', JSON.stringify(res.data));
+          router.push('/ManagerMain');
+        }
       }
-      else if(user.value.role=='2'){
-        sessionStorage.setItem('teacherData', JSON.stringify(res.data));
-        router.push('/TeacherMain');
-      }
-      else if(user.value.role=='3'){
-        sessionStorage.setItem('managerData', JSON.stringify(res.data));
-        router.push('/ManagerMain');
-      }
+      else tip.value.tips='请选择正确的身份';
     } else {
       // 可能需要在这里处理登录失败的情况
       tip.value.tips='账号不存在或密码错误';

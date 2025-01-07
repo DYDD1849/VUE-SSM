@@ -18,11 +18,13 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public List<Message> findMessageBySenderReceiver(Message message) {
         List<Message> merge= messageMapper.findMessageBySenderReceiver(message);
-        messageMapper.UpdateMessageIsReadByReceiver(message);
+        System.out.println("鹅1212");
+        System.out.println(message.getReceiver());
+            messageMapper.UpdateMessageIsReadByReceiver(message);
+            System.out.println(messageMapper.UpdateMessageIsReadByReceiver(message));
+
+
         merge.addAll(messageMapper.findMessageBySenderReceiver2(message));
-        for(Message m:merge){
-            m.setIsread("true");
-        }
         Collections.sort(merge, Comparator.comparing(Message::getDate));
         return merge;
     }
