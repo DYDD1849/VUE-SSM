@@ -52,8 +52,9 @@
   >
   <div class="searchbar">
                 <span>输入新成绩</span>
-                <el-input
+                <el-input-number
                 v-model="input1"
+                :min="0" :max="100"
                 style="width: 240px"
                 placeholder="输入成绩"
                 :prefix-icon="Search"
@@ -100,8 +101,9 @@
                 placeholder="输入学号"
                 :prefix-icon="Search"
                 />
-                <el-input
+                <el-input-number
                 v-model="input3"
+                :min="0" :max="100"
                 style="width: 200px"
                 placeholder="输入成绩"
                 :prefix-icon="Search"

@@ -8,7 +8,7 @@
                 <el-input v-model="user.account"/>
             </el-form-item>
             <el-form-item label="密码">
-                <el-input v-model="user.password"/>
+                <el-input v-model="user.password" type="password"/>
             </el-form-item>
             <!--身份选择-->
             <el-form-item label="身份">
