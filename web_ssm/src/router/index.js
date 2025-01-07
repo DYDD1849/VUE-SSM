@@ -39,12 +39,17 @@ const routes = [
           component:ChatRoom,
           children:[
             {
-            path:"/GoChat/:id",
+            path:"/GoChat/:id/:name",
             name:"StudentToChat",
             component:ChatTest,
             }
           ]
         },
+        {
+          path:"/GoChat/:id/:name",
+          name:"StudentDirectToChat",
+          component:ChatTest,
+        }
       ]
     },
 
@@ -69,12 +74,17 @@ const routes = [
           component:ChatRoom,
           children:[
             {
-            path:"/GoChat/:id",
+            path:"/GoChat/:id/:name",
             name:"TeacherToChat",
             component:ChatTest,
             }
           ]
         },
+        {
+          path:"/GoChat/:id/:name",
+          name:"TeacherDirectToChat",
+          component:ChatTest,
+        }
       ]
     },
     {

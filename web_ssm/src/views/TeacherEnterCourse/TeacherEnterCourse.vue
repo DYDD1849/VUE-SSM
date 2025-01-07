@@ -140,7 +140,7 @@
 // 跳转聊天函数
 const handleManage = (row) => {
   console.log('Managing tea:', row.account);
-   router.push({name: 'GoChat',params:{id:row.account}});
+   router.push({name: 'TeacherDirectToChat',params:{id:row.account,name:row.name}});
 };
 
 // 修改 删除点击事件处理函数

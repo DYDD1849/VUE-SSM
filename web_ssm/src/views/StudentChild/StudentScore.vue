@@ -64,7 +64,7 @@
     // 这里可以添加跳转到管理页面的逻辑，例如使用 vue-router 导航到一个管理详情页面
     // router.push({ name: 'courseManage', params: { courseId: row.cno } });
     
-     router.push({name: 'GoChat',params:{id:row.teacher.account}});
+     router.push({name: 'StudentDirectToChat',params:{id:row.teacher.account,name:row.teacher.name}});
   };
   
   // 尝试从 sessionStorage 获取学生数据，并调用 API
