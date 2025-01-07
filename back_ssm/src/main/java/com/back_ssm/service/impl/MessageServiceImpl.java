@@ -2,6 +2,7 @@ package com.back_ssm.service.impl;
 
 import com.back_ssm.mapper.MessageMapper;
 import com.back_ssm.pojo.Message;
+import com.back_ssm.pojo.combination.MessageName;
 import com.back_ssm.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,5 +40,12 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public List<Message> findIsReadMessageByReceiver(Message message) {
         return messageMapper.findIsReadMessageByReceiver(message);
+    }
+
+    @Override
+    public List<MessageName> findSenderByStudentTeacher(Message message) {
+        List<MessageName> a=messageMapper.findSenderByStudent(message);
+        a.addAll(messageMapper.findSenderByTeacher(message));
+        return a;
     }
 }
