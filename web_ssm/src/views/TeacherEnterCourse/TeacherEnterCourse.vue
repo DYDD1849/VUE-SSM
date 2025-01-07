@@ -125,7 +125,7 @@
   import { ref} from 'vue';
   import { teacherEnterCourse } from '@/api/main/teacherMain.js';
   import { useRouter,useRoute } from 'vue-router';
-  import {TeacherAltScore,TeacherDelScore,TeacherAddScore,TeacherSearchStudent} from '@/api/main/teacherDoSC/scoreUpdate.js';
+  import {TeacherAltScore,TeacherDelScore,TeacherAddScore,searchStudentScoreByCnoSname} from '@/api/main/teacherDoSC/scoreUpdate.js';
 //教师信息传递
   const teacherData = ref(null);
 //存储所有成绩信息
@@ -171,8 +171,8 @@ const input3 = ref();
 //搜索功能
 const SearchStudent =async()=>{
   console.log("input",input0.value)
-  const student={name:input0.value}
-  const res = await TeacherSearchStudent(student);
+  const cnoSname={name:input0.value,cno:storeCno.value}
+  const res = await searchStudentScoreByCnoSname(cnoSname);
   items.value=res.data;
   console.log("name",res);
 }

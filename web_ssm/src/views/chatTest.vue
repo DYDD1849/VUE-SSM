@@ -27,7 +27,7 @@
                 : 'message-other-asWhole-top'
             "
           >
-            {{ message.sender }}
+            {{ (message.sender==Medata.account)?Medata.name:"other"}}
           </div>
           <!--          消息内容-->
           <div :class="message.sender === 'me' ? 'message-me' : 'message-other'">
@@ -51,7 +51,7 @@
                 </el-button>
               </template>
               <template #append>
-                <el-button>
+                <el-button @click="send">
                     发送
                 </el-button>
               </template>
@@ -63,21 +63,22 @@
     </div>
   </template>
   <script>
-  import { useRouter } from 'vue-router';
+  import { useRouter,useRoute } from 'vue-router';
   import { ref} from 'vue';
+  import { MeSendMessage } from '@/api/main/chatfun/chatac.js'
   export default {
     setup() {
     const router = useRouter();
     const textareaMsg = ref("");
     const Medata=ref((JSON.parse(sessionStorage.getItem('studentData'))!=null)?JSON.parse(sessionStorage.getItem('studentData')):JSON.parse(sessionStorage.getItem('teacherData')))
-        
     const role=ref(JSON.parse(sessionStorage.getItem('studentData'))!=null?1:2)
-        
+    var route = useRoute(); 
+    var storeReceiver = route.params.id;
     const messages= ref([
-          { sender: "me", content: "你好！" },
+          { sender: "123456", content: "你好！" },
           { sender: "other", content: "你好啊！" },
           { sender: "other", content: "请问有什么我可以帮助你的吗？" },
-          { sender: "me", content: "我正在寻找一家好的餐厅。" },
+          { sender: "123456", content: "我正在寻找一家好的餐厅。" },
           { sender: "other", content: "你在哪个城市？" },
           { sender: "me", content: "我在北京。" },
           {
@@ -103,6 +104,15 @@
     router.push("/TeacherMain");
      // 返回
     };
+
+    const send = () => {
+      console.log("m",textareaMsg.value)
+      storeReceiver = route.params.id;
+      console.log("sss",storeReceiver)
+      var Message = { sender:Medata.value.account,receiver:storeReceiver,msg:textareaMsg.value}
+      const res = MeSendMessage(Message)
+      console.log("我发的信息",res)
+    }
  
     return {
       Medata,
@@ -110,50 +120,11 @@
       messages,
       textareaMsg,
       goback,
+      send
       // 如果需要，可以在这里返回其他响应式状态或函数
     };
   },
-    // data() {
-    //   return {
-    //     Medata:(JSON.parse(sessionStorage.getItem('studentData')).sno!=null)?JSON.parse(sessionStorage.getItem('studentData')):JSON.parse(sessionStorage.getItem('teacherData'))
-    //     ,
-    //     role:(JSON.parse(sessionStorage.getItem('studentData')).sno!=null)?1:2
-    //     ,
-    //     messages: [
-    //       { sender: "me", content: "你好！" },
-    //       { sender: "other", content: "你好啊！" },
-    //       { sender: "other", content: "请问有什么我可以帮助你的吗？" },
-    //       { sender: "me", content: "我正在寻找一家好的餐厅。" },
-    //       { sender: "other", content: "你在哪个城市？" },
-    //       { sender: "me", content: "我在北京。" },
-    //       {
-    //         sender: "other",
-    //         content: "好的，我可以为您推荐一些北京的餐厅。您需要什么类型的餐厅？",
-    //       },
-    //       { sender: "me", content: "我想要吃火锅。" },
-    //       {
-    //         sender: "other",
-    //         content:
-    //           "好的，以下是我为您推荐的北京火锅餐厅列表：[餐厅1，餐厅2，餐厅3]。您需要我帮您预约吗？",
-    //       },
-    //       { sender: "me", content: "不需要，我会自己预约。谢谢您的帮助！" },
-    //       { sender: "other", content: "不客气，祝您用餐愉快！" },
-    //       { sender: "me", content: "再见！" },
-    //       { sender: "other", content: "再见！" },
-    //     ],
-    //     textareaMsg:""
-    //   };
-    // },
-    // methods:{
-    //   Goback:function(){
-    //     console.log(this.role)
-    //     const router = useRouter();
-    //     if (this.role==1)
-    //     router.push("/StudentMain");
-    //     else
-    //     router.push("/TeacherMain");
-    //   }
-    // }
+    
   };
   </script>
   <style>
