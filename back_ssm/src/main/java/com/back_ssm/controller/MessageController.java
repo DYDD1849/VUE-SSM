@@ -1,6 +1,7 @@
 package com.back_ssm.controller;
 
 import com.back_ssm.pojo.Message;
+import com.back_ssm.pojo.combination.MessageName;
 import com.back_ssm.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,4 +32,11 @@ public class MessageController {
         if(messageService.findIsReadMessageByReceiver(message)==null)return "没有未读信息1";
         return "有未读信息2";
     }
+
+    @PostMapping(value = "/findSender")
+    @ResponseBody
+    public List<MessageName> findSender(@RequestBody Message message){
+        return messageService.findSenderByStudentTeacher(message);
+    }
+
 }
