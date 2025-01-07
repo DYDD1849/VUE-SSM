@@ -4,9 +4,6 @@
           <div class="toolbar">
             <div class="mb-4" style="margin-right: 50px;">
               <el-button type="primary" plain @click="gotoChat">邮箱</el-button>
-                
-                <el-tag type="primary" v-if="tip==没有未读消息">{{ tip }}</el-tag>
-                <el-tag type="danger"  v-else>{{tip }}</el-tag>
             </div>
             <el-text class="mx-1" type="primary" size="large" style="margin-right: 50px;">
               {{ studentData ? studentData.name : 'Default Name' }}
@@ -25,7 +22,6 @@
 import { ref } from 'vue';
 import { studentMain } from '@/api/main/studentMain.js';
 import { useRouter } from 'vue-router';
-import { MeFindNoread } from '@/api/main/chatfun/chatac.js'
 
 const studentData = ref(null);
 const items = ref([]); // 用于存储课程数据的响应式引用
@@ -36,7 +32,7 @@ const items = ref([]); // 用于存储课程数据的响应式引用
 const router = useRouter();
 
     //邮箱
-    const tip=ref(null);
+
     const gotoChat = async()=> {
     router.push({name:"ChatRoomS"});
     }
@@ -65,12 +61,6 @@ const loadStudentData = async () => {
       } catch (error) {
         console.error('调用 studentMain 时出错:', error);
       }
-    }
-    if (studentData.value) {
-      const message = { receiver:studentData.value.account}
-      const res = await MeFindNoread(message);
-      tip.value=res.data
-      console.log("未读",res.data)
     }
   } else {
     console.warn('sessionStorage 中没有存储 studentData');
