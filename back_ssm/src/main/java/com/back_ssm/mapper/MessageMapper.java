@@ -27,4 +27,6 @@ public interface MessageMapper {
     public List<MessageName> findReceiverByStudent(Message message);
     @Select("SELECT student.account AS sender, student.name AS senderName FROM chat JOIN student ON student.account = chat.receiver WHERE chat.sender = #{receiver} GROUP BY student.account, student.name")
     public List<MessageName> findReceiverByTeacher(Message message);
+    @Update("update msg set isread='true' where receiver=#{receiver} and sender=#{sender}")
+    public int altMessageToRead(Message message);
 }
