@@ -48,6 +48,7 @@ public class MangeController {
     public List<Student> searchStudentByName(@RequestBody Student student){
         return studentService.searchStudentByName(student.getName());
     }
+
     @PostMapping(value = "/searchTeacher")
     @ResponseBody
     public List<Teacher> searchTeacherByName(@RequestBody Student student){
