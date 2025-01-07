@@ -30,6 +30,7 @@ public class MessageController {
     @ResponseBody
     public String findIsReadMessageByReceiver(@RequestBody Message message){
         if(messageService.findIsReadMessageByReceiver(message).isEmpty())return "没有未读信息1";
+        System.out.println(messageService.findIsReadMessageByReceiver(message).get(0).getMsg());
         return "有未读信息2";
     }
 
