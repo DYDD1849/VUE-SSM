@@ -41,7 +41,7 @@
     router.push({name: 'TeacherEnterCourse',params:{ cno:row.cno}});
     // router.push({ name: 'courseManage', params: { courseId: row.cno } });
   };
-  // 尝试从 sessionStorage 获取学生数据，并调用 API
+  // 尝试从 sessionStorage 获取教师数据，并调用 API
   const loadTeacherData = async () => {
   const storedObjectString = sessionStorage.getItem('teacherData');
   if (storedObjectString) {

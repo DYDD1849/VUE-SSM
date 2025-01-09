@@ -56,8 +56,9 @@
   >
   <div class="searchbar">
                 <span>输入新成绩</span>
-                <el-input
+                <el-input-number
                 v-model="input1"
+                :min="0" :max="100"
                 style="width: 240px"
                 placeholder="输入成绩"
                 :prefix-icon="Search"
@@ -98,8 +99,9 @@
   >
   <div class="searchbar">
                 <span>输入新成绩</span>
-                <el-input
+                <el-input-number
                 v-model="input2"
+                :min="0" :max="100"
                 style="width: 200px"
                 placeholder="输入学号"
                 :prefix-icon="Search"
@@ -178,10 +180,12 @@ const SearchStudent =async()=>{
 }
 //修改内容处理
 const modify = async()=>{
-  const score ={sno:storeSno.value,cno:storeCno.value,sscore:input1.value};
-  const res = await TeacherAltScore(score);
-  console.log(res);
-  window.location.reload();
+    // 验证成绩是否在0到100之间
+      const score ={sno:storeSno.value,cno:storeCno.value,sscore:input1.value};
+      const res = await TeacherAltScore(score);
+      console.log(res);
+      window.location.reload();
+    
 }
 //删除内容处理
 const del = async()=>{
