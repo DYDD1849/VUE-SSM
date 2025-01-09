@@ -18,10 +18,9 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public List<Message> findMessageBySenderReceiver(Message message) {
         List<Message> merge= messageMapper.findMessageBySenderReceiver(message);
-        System.out.println("鹅1212");
-        System.out.println(message.getReceiver());
+
             messageMapper.UpdateMessageIsReadByReceiver(message);
-            System.out.println(messageMapper.UpdateMessageIsReadByReceiver(message));
+
 
 
         merge.addAll(messageMapper.findMessageBySenderReceiver2(message));

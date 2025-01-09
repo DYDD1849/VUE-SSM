@@ -64,7 +64,7 @@
   </template>
   <script>
   import { useRouter,useRoute } from 'vue-router';
-  import { ref} from 'vue';
+  import { ref,watch} from 'vue';
   import { MeSendMessage,LoadMessage } from '@/api/main/chatfun/chatac.js'
   export default {
     setup() {
@@ -75,17 +75,40 @@
     var route = useRoute(); 
     var storeReceiver = route.params.id;
     var storeReName = route.params.name;
-    const messages= ref([])
+    var messages= ref([])
+
+    //
+    // 定义一个函数，当 storeReceiver 变化时调用
+    const handleStoreReceiverChange = (newReceiver) => {
+      console.log('Store receiver changed to:', newReceiver);
+      // 在这里添加你想要执行的逻辑
+      var message={sender:Medata.value.account,receiver:newReceiver}
+      const res = LoadMessage(message)
+      messages.value=res
+      console.log("ee",messages)
+      window.location.reload();
+    };
+        // 使用 watch 监视 route 对象的变化
+        watch(
+      () => route,
+      (newRoute) => {
+        // 更新 storeReceiver 和 storeReName
+        storeReceiver = newRoute.params.id;
+        storeReName = newRoute.params.name;
+        // 调用处理函数
+        handleStoreReceiverChange(storeReceiver);
+      },
+      { deep: true } // 需要深度监视 route 对象的变化
+    );
 
     const loadMessage = async () => {
       var message={sender:Medata.value.account,receiver:storeReceiver}
       const res = await LoadMessage(message)
       messages.value=res.data
       console.log("加载信息",messages.value)
-      
     }
+    
     loadMessage()
-
     const goback =  () => {
     if (role.value==1)
     router.push("/StudentMain");
