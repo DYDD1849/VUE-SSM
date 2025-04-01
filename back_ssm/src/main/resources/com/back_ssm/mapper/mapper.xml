@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.back_ssm.mapper.CourseMapper">
+    <select id="findSnoCourseBySno" parameterType="String" resultMap="snoCourseMap">
+        SELECT
+        sc.sscore,
+        course.cname,
+        course.cno,
+        course.credit,
+        course.semester,
+        course.ctime,
+        teacher.tno,
+        teacher.name,
+        teacher.college,
+        teacher.sex,
+        teacher.title,
+        teacher.account
+        FROM
+        sc
+        INNER JOIN
+        course ON sc.cno = course.cno
+        INNER JOIN
+        teacher ON course.tno = teacher.tno
+        WHERE
+        sc.sno = #{sno}
+    </select>
+
+    <resultMap id="snoCourseMap" type="com.back_ssm.pojo.SnoCourse">
+        <!-- 映射sScore字段 -->
+        <result property="sScore" column="sscore" />
+
+        <!-- 嵌套映射Course对象 -->
+        <association property="course" javaType="com.back_ssm.pojo.Course">
+            <id property="cname" column="cname" /> <!-- 假设cname是Course的主键 -->
+            <result property="cno" column="cno" />
+            <result property="credit" column="credit" />
+            <result property="semester" column="semester" />
+            <result property="ctime" column="ctime" />
+            <!-- 注意：这里没有映射tno到Course对象，因为tno应该属于Teacher对象 -->
+        </association>
+
+        <!-- 嵌套映射Teacher对象 -->
+        <association property="teacher" javaType="com.back_ssm.pojo.Teacher">
+            <id property="tno" column="tno" /> <!-- Teacher的主键 -->
+            <result property="name" column="name" />
+            <result property="college" column="college" />
+            <result property="sex" column="sex" />
+            <result property="title" column="title" />
+            <result property="account" column="account" />
+        </association>
+    </resultMap>
+</mapper>
